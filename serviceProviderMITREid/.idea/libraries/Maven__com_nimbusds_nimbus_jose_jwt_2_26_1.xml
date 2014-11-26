@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.nimbusds:nimbus-jose-jwt:2.26.1">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../../../../../../confs/kiss/m2/com/nimbusds/nimbus-jose-jwt/2.26.1/nimbus-jose-jwt-2.26.1.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$PROJECT_DIR$/../../../../../../../confs/kiss/m2/com/nimbusds/nimbus-jose-jwt/2.26.1/nimbus-jose-jwt-2.26.1-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/../../../../../../../confs/kiss/m2/com/nimbusds/nimbus-jose-jwt/2.26.1/nimbus-jose-jwt-2.26.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
