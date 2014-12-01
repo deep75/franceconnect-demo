@@ -1,0 +1,164 @@
+body {background-color:#fff;color: #000;font-family:'Scada',Arial,Helvetica,sans-serif;font-size:12px;line-height:1.4;}
+h1,h2,h3{color:#000;}
+table{font-size:120%;}
+a{text-decoration:none;}
+a:hover{text-decoration:none;}
+
+.wrapper{min-height:500px;}
+
+#page h1 {font-size: 3em;}
+#page h2 {font-size: 2em;}
+#page.legal-info {background-color: #EDEDED;}
+#page a {color: #000;}
+#page p {margin: 0 0 1em;}
+
+header{margin-bottom:1em;}
+
+/* Banner styles */
+#banner {background: none repeat scroll 0 0 #11ABC5;display: block;margin-top: 0; padding: 0 0 10px;}
+#banner .container div h1{color: #fff;}
+#banner .container div h1 a{color: #fff;}
+
+.btn-top{background:#1A99AC none; border-color:#1A99AC;box-shadow:none;margin:0 0 -2px 0;}
+.btn-top:hover{background:#1A99AC none; border-color:#1A99AC;box-shadow:none;}
+
+/* FOOTER STYLES */
+.footer { background:#34D1C6;background:#1A99AC;padding:30px 0;}
+.footer a {color: #C2F1EE;line-height: inherit;text-decoration: none;}
+ul.social { list-style: none outside none;margin:0;}
+.social { padding-bottom: 50px;}
+ul.social li { display: inline; float: left; margin-right: 7px;}
+a.btn-paris { background: url("../images/local/skin/logo-paris-footer.png") no-repeat scroll 0 0 transparent; display: block; height: 74px; width: 186px;}
+a.fb { background: url("../images/local/skin/facebook.png") no-repeat scroll 0 0 transparent; display: block; height: 55px; width: 45px;}
+a.twt {background: url("../images/local/skin/twitter.png") no-repeat scroll 0 0 transparent; display: block; height: 55px; width: 45px;}
+.contact { color: #fff; font-size: 13px; margin-right: 10px;}
+.credits { color: #fff;  font-size: 13px;}
+/* END FOOTER */
+
+
+/* FORM-HORIZONTAL */
+.form-horizontal .control-label {  width: 160px;}
+.form-horizontal .controls { margin-left: 180px;}
+
+/* MyAccount */
+.thumbnail .caption  p{ height: 50px;font-size:150%;text-align:center;}
+.thumbnail .caption a.btn{ height: 35px;vertical-align:middle;}
+
+
+/* CRM toolbar*/
+.message-accueil{background-color:#11ABC5;padding-left:10px;color:#FFF;position:absolute;top:70px;left:20px}
+
+/* Nav navtabs */
+.nav-tabs > li > a{font-size:150%;}
+
+/* Icons */
+.spaced-right{margin-right:2%;}
+
+/***************************************************/
+/* Error message 									*/
+/***************************************************/
+/***************************************************/
+.error-box{margin:10% 15%;}
+.error-box h3{color:#BD4247;}
+.error-box blockquote{font-size:180%;}
+
+/***************************************************/
+
+/* WELL GU */
+.well-gu{background-color:#1A9CAF;color:#fff;padding:0px;
+-webkit-box-shadow: 5px 4px 8px rgba(0, 0, 0, 0.46);
+-moz-box-shadow:    5px 4px 8px rgba(0, 0, 0, 0.46);
+box-shadow:         5px 4px 8px rgba(0, 0, 0, 0.46);
+}
+.well-gu a{color:#fff;}
+.well-gu h4{border-bottom:2px dotted #fff;background-color:#fff;color:#000;padding:10px 10px;margin:0;}
+.well-gu ul{ padding:10px;}
+.well-gu ul li{ border-bottom:2px dotted #fff; background: url('../images/local/skin/red_square.png') no-repeat left 10px; padding:5px 0 5px 15px;}
+.well-gu ul li a.label-demand{ display:inline-block;width:75%; }
+
+.well-notif{font-size:120%;}
+
+/* PORTLET */
+.portlet {background-color: #fff;padding:0;}
+
+.portlet .well li{font-size:140%;}
+.portlet h1, h2, h3{color:#000;font-size:200%;font-weight:bold;}
+.portlet-background-content {background-color: #fff;	padding:1em;}
+.portlet-header{font-size:1.4em;font-weight:bold;}
+.portlet-background-header, .portlet-background-colored-header {background-image: url("../images/local/skin/title_background.png");background-color:#2178B3;font-size:1.4em;font-weight:bold;color:#EEEEEE;padding:0.28em 1em;border-bottom: 1px solid #efefef;}
+
+.portlet-gu a{text-decoration: none;	color: #000000;}
+.portlet-background-colored-content {background-image:url("../images/local/skin/portlet_background.png");background-repeat:repeat-x;background-color: #fdfdff;padding:1em;}
+
+/****************************/
+/* Plugins 					*/
+/****************************/
+/* MyLutece */
+.logged-big{ padding:12px 12px 14px 12px;}
+.logged-tiny{padding:5.8px 5px;}
+.last-connexion{color:#fff;margin-top:5px;font-size:105%;}
+.user-status-account{color:#fff;font-size:105%;}
+/* Captcha */
+#captchaImage {height: 70px;}
+
+/**************************************************************/
+/*************** @media ******************/
+/* Portrait tablet to landscape and desktop */
+@media (min-width:979px) and (max-width:1200px) {
+	#logo-paris-fr{margin-top:4em;}
+}
+
+@media (min-width: 768px) and (max-width: 979px) {
+	header{margin-bottom:0;}
+	.social{display:none;}
+	.wrapper{min-height:auto;}
+	.nav{ margin:0;float:left; }
+	/*.nav .btn-navbar{background:none;border:none;}*/
+	.navbar-inner{background:none;border:none;padding-left:0;margin:0;float:left;background-color:transparent;border-radius:none;-webkit-border-radius:none;-moz-border-radius:none;box-shadow:none;-webkit-box-shadow:none;-moz-box-shadow:none;}
+	.navbar-fixed-top{margin:0;position:absolute;top:60px;right:90%;}
+	.navbar .btn-navbar{margin-top:20px;margin-left:-2px;background-color:#11ABC5;background-image:none;float:left !important;}
+	#banner{padding:20px; margin:0 }
+	#banner h1{font-size:100%;}
+	/*#banner{display:none;}*/
+	ul.breadcrumb{display:none;}
+}
+ 
+/* Landscape phone to portrait tablet */
+@media (max-width: 767px) {
+	body{margin-top:-20px;padding:0;}
+	.wrapper{padding:0 2%;}
+	header{margin-bottom:0;}
+	.nav{ margin:0;float:left; }
+	/*.nav .btn-navbar{background:none;border:none;}*/
+	.navbar-fixed-top{margin:0;position:absolute;top:5px;right:82%;}
+	.navbar-inner{background:none;border:none;margin:0;float:left;background-color:transparent;border-radius:none;-webkit-border-radius:none;-moz-border-radius:none;box-shadow:none;-webkit-box-shadow:none;-moz-box-shadow:none;}
+	.navbar .btn-navbar{margin-top:20px;margin-left:-2px;background-color:#11ABC5;background-image:none;float:left !important;}
+	#banner{padding:20px; margin:0 }
+	#banner h1{font-size:100%;}
+	/* #banner{display:none;} */
+	ul.breadcrumb{display:none;}
+	.footer .span3{display:none;}
+	.social{display:none;}
+}
+ 
+/* Landscape phones and down */
+@media (max-width: 480px) {
+	body{margin-top:-20px;padding:0;}
+	.wrapper{padding:0 2%;}
+	header{margin-bottom:0;}
+	.nav{ margin:0;float:left; }
+	/*.nav .btn-navbar{background:none;border:none;}*/
+	.navbar-inner{background:none;border:none;margin:0;float:left;background-color:transparent;border-radius:none;-webkit-border-radius:none;-moz-border-radius:none;box-shadow:none;-webkit-box-shadow:none;-moz-box-shadow:none;}
+	.navbar-fixed-top{margin:0;position:absolute;top:5px;right:82%;}
+	.navbar .btn-navbar{margin-top:20px;margin-left:-2px;background-color:#11ABC5;background-image:none;}
+	#banner{padding:20px; margin:0 }
+	#banner h1{font-size:100%;}
+	/* #banner{display:none;} */
+	ul.breadcrumb{display:none;}
+	.footer .span3{display:none;}
+	.social{display:none;}
+}
+
+/* JQuery Validation */
+input[type="text"].error{border:2px solid red;color:red;}
+label.error{color:red;}
