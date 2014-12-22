@@ -34,11 +34,12 @@ router.get('/oidc_callback', function (req, res, next) {
 
 router.get('/demarche/etape1', function (req, res) {
     if (req.session.passport.user != null) {
-        // pas de sessions utilisateur -> on redirige vers la page d'accueil
-        //res.redirect(302, '/');
         req.session.user = req.session.passport.user.displayName;
+        res.render('demarche-etape1', {title: 'Démarche', user: req.session.user});
+    } else {
+        // pas de sessions utilisateur -> on redirige vers la page d'accueil
+        res.redirect(302, '/');
     }
-    res.render('demarche-etape1', {title: 'Démarche', user: req.session.user});
 });
 
 router.get('/get-data', function (req, res) {
