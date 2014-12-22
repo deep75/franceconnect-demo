@@ -1,0 +1,19 @@
+{
+  "env": "development",
+  "openIdConnectStrategyParameters": {
+    "clientID": "5a643bb4569e324e3814d9d32c4092a4",
+    "clientSecret": "d8844a92d54c7404129e2bb6e33506fa",
+    "callbackURL": "http://localhost:3001/oidc_callback",
+    "authorizationURL": "http://fcp.dev.dev-franceconnect.fr/user/authorize",
+    "tokenURL": "http://fcp.dev.dev-franceconnect.fr/user/token",
+    "userInfoURL": "http://fcp.dev.dev-franceconnect.fr/api/user",
+    "scope": ["profile"]
+  },
+  "oauth": {
+    "authorizationURL": "http://fcp.dev.dev-franceconnect.fr/user/authorize",
+    "tokenURL": "http://fcp.dev.dev-franceconnect.fr/user/token",
+    "callbackURL": "http://localhost:3001/data/callback",
+    "scopes": ["quotient_familial"]
+  },
+  "quotientFamilialURL": "http://fdp.dev.dev-franceconnect.fr/quotientFamilial"
+}
