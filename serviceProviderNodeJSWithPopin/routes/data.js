@@ -30,12 +30,12 @@ passport.deserializeUser(function (obj, done) {
 });
 
 //1st step
-/*router.get('/', function (req, res, next) {
+router.get('/', function (req, res, next) {
     req.session.user = req.session.passport.user;
     next();
 }, passport.authenticate('provider'), function (req, res, next) {
     console.log('got through the oauth2 authentication process.');
-});*/
+});
 
 //2nd step
 router.get('/callback', passport.authenticate('provider', {

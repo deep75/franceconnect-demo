@@ -13,7 +13,7 @@
     "authorizationURL": "http://fcp.dev.dev-franceconnect.fr/user/authorize",
     "tokenURL": "http://fcp.dev.dev-franceconnect.fr/user/token",
     "callbackURL": "http://localhost:3001/data/callback",
-    "scopes": ["quotient_familial"]
+    "scopes": ["revenu_fiscal_de_reference"]
   },
   "quotientFamilialURL": "http://fdp.dev.dev-franceconnect.fr/quotientFamilial"
 }

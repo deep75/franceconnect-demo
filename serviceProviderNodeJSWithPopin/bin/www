@@ -1,1 +1,1 @@
-PORT=3010 node app
+PORT=3001 node app
