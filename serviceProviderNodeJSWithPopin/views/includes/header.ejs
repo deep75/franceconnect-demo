@@ -35,12 +35,21 @@
                     <% } %>
                 </div>
                 <div class="span12 hidden-desktop pagination-centered">
+                    <% if (user) { %>
+                    <span class="pull-right" style="font-size: 16px; font-weight: bold; color: #EEE;">Merci de vous être identifié,
+                        <%= user %>. <br/>
+                        <button class="btn btn-default pull-right" onclick="window.location = '/logout'">Se
+                            déconnecter
+                        </button>
+                    </span>
+                    <% } else { %>
                     <h4 style="color:#fff;">GUICHET DES PARISIENS</h4>
 				    <span class="span2 pull-right">
                         <a id="fc_login" class="btn btn-large" href="/login_org">
                             <img src="/images/logoFC.png" style="height:20px"/>
                         </a>
                     </span>
+                    <% } %>
                 </div>
             </div>
         </div>
