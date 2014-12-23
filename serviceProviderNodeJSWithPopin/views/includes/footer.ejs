@@ -41,32 +41,3 @@
         </div>
     </div>
 </footer>
-
-<div id="fc_login_popin" style="display: none">
-    <iframe src="/login_org" style="width: 500px; height: 600px;"></iframe>
-</div>
-
-<!-- listener on login success postMessage from popin -->
-<script type="text/javascript">
-    addEventListener("message", receiveMessage, false);
-    function receiveMessage(event) {
-        window.location.href = '/demarche/etape1';
-    }
-</script>
-
-<!-- Add fancyBox -->
-<script type="text/javascript" src="/javascripts/jquery.fancybox.pack.js"></script>
-
-<script type="text/javascript">
-    $(document).ready(function () {
-        $(".fancybox").fancybox({
-            closeBtn: '<a title="Close" class="fancybox-item fancybox-close" href="javascript:;"></a>',
-            openEffect: 'none',
-            closeEffect: 'none',
-            nextEffect: 'none',
-            prevEffect: 'none',
-            padding: 0,
-            margin: [20, 60, 20, 60] // Increase left/right margin
-        });
-    });
-</script>

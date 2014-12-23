@@ -4,8 +4,6 @@
             <div class="row">
                 <div class="span12">
                     <a href="http://www.paris.fr/">
-                        <img class="logo png_bg" src="/Guichet%20Parisiens%20-%20accueil_files/mdp.png" title="Paris.fr"
-                             alt="Paris.fr">
                     </a>
                 </div>
             </div>
@@ -45,5 +43,39 @@
         </div>
     </div>
 </header>
+
+<div id="fc_login_popin" style="display: none">
+</div>
+
+<!-- listener on login success postMessage from popin -->
+<script type="text/javascript">
+    addEventListener("message", receiveMessage, false);
+    function receiveMessage(event) {
+        $("#fc_login_popin").hide();
+        window.location.href = '/demarche/etape1';
+    }
+</script>
+
+<!-- Add fancyBox -->
+<script type="text/javascript" src="/javascripts/jquery.fancybox.pack.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".fancybox").fancybox({
+            closeBtn: '<a title="Close" class="fancybox-item fancybox-close" href="javascript:;"></a>',
+            openEffect: 'none',
+            closeEffect: 'none',
+            nextEffect: 'none',
+            prevEffect: 'none',
+            padding: 0,
+            margin: [20, 60, 20, 60],
+            afterLoad: function () {
+                // l'iframe ne doit être insérée dans le DOM que quand l'utilisateur choisit de se connecter, sinon la mécanique de connexion se lance en tâche de fond
+                this.content = this.content.html() + '<iframe src="/login_org" style="width: 500px; height: 600px;"></iframe>';
+            }
+        });
+    });
+</script>
+
 
 
