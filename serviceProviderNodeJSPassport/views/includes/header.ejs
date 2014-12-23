@@ -83,7 +83,7 @@
             margin: [20, 60, 20, 60],
             afterLoad: function () {
                 // l'iframe ne doit être insérée dans le DOM que quand l'utilisateur choisit de se connecter, sinon la mécanique de connexion se lance en tâche de fond
-                this.content = this.content.html() + '<iframe src="/login_org" style="width: 500px; height: 600px;"></iframe>';
+                this.content = '<iframe src="/login_org" style="width: 500px; height: 600px;"></iframe>';
             }
         });
     });
