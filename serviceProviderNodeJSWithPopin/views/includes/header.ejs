@@ -13,30 +13,32 @@
                         <a href="https://guichet.paris.fr/crm/accueil.html">GUICHET DES PARISIENS</a>
                     </h1>
                 </div>
-                <% if (user) { %>
-                <div class="span7 hidden-phone">
+                <div class="hidden-phone hidden-tablet">
+                    <% if (user) { %>
+                    <div class="span7">
                     <span class="span2 pull-right" style="font-size: 16px; font-weight: bold; color: #EEE;">Merci de vous être identifié,
                         <%= user %>. <br/>
                         <button class="btn btn-default" onclick="window.location = '/logout'">Se
                             déconnecter
                         </button>
                     </span>
-                </div>
-                <% } else { %>
-                <div class="span7 hidden-phone">
+                    </div>
+                    <% } else { %>
+                    <div class="span7">
 				    <span class="span2 pull-right">
                         <a class="btn btn-large fancybox" rel="group" href="#fc_login_popin" scrolling="auto"
                            modal="true" autoHeight="false" autoSize="false" width="500px" height="750px"><img
                                     src="/images/logoFC.png" style="height:20px"/></a>
                     </span>
+                    </div>
+                    <% } %>
                 </div>
-                <% } %>
-                <div class="span12 show-phone hidden-tablet hidden-desktop pagination-centered">
+                <div class="span12 hidden-desktop pagination-centered">
                     <h4 style="color:#fff;">GUICHET DES PARISIENS</h4>
 				    <span class="span2 pull-right">
-                        <a class="btn btn-large fancybox" rel="group" href="#fc_login_popin" autoHeight="false"
-                           autoSize="false" width="500px" height="650px"><img src="/images/logoFC.png"
-                                                                              style="height:20px"/></a>
+                        <a class="btn btn-large" href="/login_org">
+                            <img src="/images/logoFC.png" style="height:20px"/>
+                        </a>
                     </span>
                 </div>
             </div>
