@@ -72,18 +72,13 @@
                             <img title="Main sur formulaire" src="/Guichet%20Parisiens%20-%20accueil_files/main.jpg"
                                  alt="©Sophie Robichon/Mairie de Paris" width="400" height="305">
                         </div>
-                        <div class="span7 well well-small">
-                            <h2>Inscription à la cantine :</h2>
-                            <ul>
-                                <li>Nom : <strong><%= user %></strong>
-                                </li>
-                                <li>Votre quotient familial : <strong><%= data %></strong>
-                                </li>
-                                <li>Le prix de la cantine sera de <strong>3,60€ par jour et par enfant</strong>
-                                </li>
-                            </ul>
-                            <p class="pull-right">
-                                <span class="btn btn-primary">Votre démarche est terminée.</span>
+                        <div class="span6 well well-small">
+                            <h2>Merci de vérifier les données suivantes :</h2>
+                            <p>Votre revenu fiscal de référence est : <b><%= data %> euros</b></p>
+                            <p>Pour votre enfant <b><%= informationsCantine.prenomEnfant + ' '+ informationsCantine.nomEnfant%></b> </p>
+                            <p>Le montant à régler pour un repas de cantine sera de <b>3.64 euros</b></p>
+                            <p>
+                                <a href="/data/fin-demarche" class="btn btn-large">Poursuivre</a>
                             </p>
                         </div>
                     </div>
