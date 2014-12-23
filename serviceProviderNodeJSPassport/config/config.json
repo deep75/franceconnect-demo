@@ -1,19 +1,19 @@
 {
-  "env":"development",
+  "env": "development",
   "openIdConnectStrategyParameters": {
-    "clientID": "c5d2f76aba460560df753b361d25639e",
-    "clientSecret": "79c8c51f9c824cb34a960cb2b47b705f",
+    "clientID": "5a643bb4569e324e3814d9d32c4092a4",
+    "clientSecret": "d8844a92d54c7404129e2bb6e33506fa",
     "callbackURL": "http://localhost:3001/oidc_callback",
-    "authorizationURL": "http://fcp.integ01.dev-franceconnect.fr/user/authorize",
-    "tokenURL": "http://fcp.integ01.dev-franceconnect.fr/user/token",
-    "userInfoURL": "http://fcp.integ01.dev-franceconnect.fr/api/user",
+    "authorizationURL": "http://fcp.dev.dev-franceconnect.fr/user/authorize",
+    "tokenURL": "http://fcp.dev.dev-franceconnect.fr/user/token",
+    "userInfoURL": "http://fcp.dev.dev-franceconnect.fr/api/user",
     "scope": ["profile"]
   },
-  "oauth":{
-    "authorizationURL": "http://fcp.integ01.dev-franceconnect.fr/user/authorize",
-    "tokenURL": "http://fcp.integ01.dev-franceconnect.fr/user/token",
-    "callbackURL": "http://fsp1.integ01.dev-franceconnect.fr/data/callback",
-    "scopes":["quotient_familial"]
+  "oauth": {
+    "authorizationURL": "http://fcp.dev.dev-franceconnect.fr/user/authorize",
+    "tokenURL": "http://fcp.dev.dev-franceconnect.fr/user/token",
+    "callbackURL": "http://localhost:3001/data/callback",
+    "scopes": ["revenu_fiscal_de_reference"]
   },
-  "quotientFamilialURL": "http://fdp.integ01.dev-franceconnect.fr/quotientFamilial"
+  "quotientFamilialURL": "http://fdp.dev.dev-franceconnect.fr/quotientFamilial"
 }

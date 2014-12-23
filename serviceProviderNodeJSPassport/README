@@ -1,2 +1,2 @@
-Pour lancer l'application sur le port 3001 :
-npm start
+Pour lancer l'application :
+PORT=3001 npm start
