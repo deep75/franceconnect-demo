@@ -33,7 +33,7 @@ router.get('/oidc_callback', function (req, res, next) {
 router.get('/demarche/etape1', function (req, res) {
     if (req.session.passport.user != null) {
         req.session.user = req.session.passport.user.displayName;
-        res.render('demarche-etape1', {title: 'Démarche', user: req.session.user});
+        res.render('demarche-etape1', {title: 'Démonstrateur France Connect - Inscription à la cantine scolaire', user: req.session.user});
     } else {
         res.redirect(302, '/');
     }
@@ -41,14 +41,6 @@ router.get('/demarche/etape1', function (req, res) {
 
 router.get('/get-data', function (req, res) {
     res.redirect(302, config.oauthProviderURL + '?client_id=123&scope=data&redirect_uri=' + config.oauth2AllowCallbackURL);
-});
-
-router.get('/oauth2/allow', function (req, res) {
-    res.render('oauth2-allow');
-});
-
-router.get('/oauth2/deny', function (req, res) {
-    res.render('oauth2-deny');
 });
 
 router.get('/logout', function (req, res) {
