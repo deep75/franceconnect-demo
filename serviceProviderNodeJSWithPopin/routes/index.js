@@ -8,7 +8,7 @@ router.get('/login_org', passport.authenticate('openidconnect'), function (req, 
 });
 
 router.get('/', function (req, res) {
-    res.render('index');
+    res.render('index', {title: 'Démonstrateur France Connect - Accueil', user: req.session.user});
 });
 
 
