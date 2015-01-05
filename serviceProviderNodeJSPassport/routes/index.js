@@ -31,8 +31,11 @@ router.get('/oidc_callback', function (req, res, next) {
 });
 
 router.get('/demarche/etape1', function (req, res) {
-    if (req.session.passport.user != null) {
-        req.session.user = req.session.passport.user.displayName;
+    if (req.session.passport.user !== null) {
+        var given_name = (req.session.passport.user._json.given_name) ? req.session.passport.user._json.given_name : '';
+        var family_name = (req.session.passport.user._json.family_name) ? req.session.passport.user._json.family_name : '';
+        req.session.user = given_name + ' ' + family_name;
+
         res.render('demarche-etape1', {title: 'Démonstrateur France Connect - Inscription à la cantine scolaire', user: req.session.user});
     } else {
         res.redirect(302, '/');
