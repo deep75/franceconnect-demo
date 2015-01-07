@@ -31,7 +31,7 @@ router.get('/oidc_callback', function (req, res, next) {
 });
 
 router.get('/demarche/etape1', function (req, res) {
-    if (req.session.passport.user !== null) {
+    if (req.session.passport.user !== undefined) {
         var given_name = (req.session.passport.user._json.given_name) ? req.session.passport.user._json.given_name : '';
         var family_name = (req.session.passport.user._json.family_name) ? req.session.passport.user._json.family_name : '';
         req.session.user = given_name + ' ' + family_name;
