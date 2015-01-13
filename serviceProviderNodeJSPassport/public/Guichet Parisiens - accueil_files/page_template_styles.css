@@ -86,6 +86,7 @@ box-shadow:         5px 4px 8px rgba(0, 0, 0, 0.46);
 
 .portlet-gu a{text-decoration: none;	color: #000000;}
 .portlet-background-colored-content {background-repeat:repeat-x;background-color: #fdfdff;padding:1em;}
+.portlet p {font-size:14px}
 
 /****************************/
 /* Plugins 					*/
