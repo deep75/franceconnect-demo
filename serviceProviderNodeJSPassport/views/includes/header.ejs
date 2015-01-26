@@ -9,42 +9,39 @@
                 </div>
             </div>
             <div class="row">
-                <div class="span5 hidden-phone">
+                <div class="span5">
                     <h1>
-                        <a href="https://guichet.paris.fr/crm/accueil.html">GUICHET DES PARISIENS</a>
+                        <a href="#">GUICHET DES PARISIENS</a>
                     </h1>
                 </div>
-                <div class="hidden-phone hidden-tablet">
+                <div class="hidden-phone hidden-tablet" style="padding-top: 15px">
                     <% if (user) { %>
                     <div class="span7">
-                    <span class="span2 pull-right" style="font-size: 16px; font-weight: bold; color: #EEE;">Merci de vous être identifié,
-                        <%= user %>. <br/>
-                        <button class="btn btn-default" onclick="window.location = '/logout'">Se
-                            déconnecter
-                        </button>
-                    </span>
-                    </div>
-                    <% } else { %>
-                    <div class="span7">
-				    <span class="span2 pull-right">
-                        <a id="fc_login_popin" class="btn btn-large fancybox" rel="group" href="#fc_login_popin" scrolling="auto"
-                           modal="true" autoHeight="false" autoSize="false" width="500px" height="750px"><img
-                                    src="/images/logoFC.png" style="height:20px"/></a>
-                    </span>
-                    </div>
-                    <% } %>
-                </div>
-                <div class="span12 hidden-desktop pagination-centered">
-                    <% if (user) { %>
                     <span class="pull-right" style="font-size: 16px; font-weight: bold; color: #EEE;">Merci de vous être identifié,
                         <%= user %>. <br/>
                         <button class="btn btn-default pull-right" onclick="window.location = '/logout'">Se
                             déconnecter
                         </button>
                     </span>
+                    </div>
+                    <% } else { %>
+                    <a id="span7 fc_login_popin" class="btn btn-large fancybox pull-right" rel="group"
+                       href="#fc_login_popin" scrolling="auto"
+                       modal="true" autoHeight="false" autoSize="false" width="500px" height="750px"><img
+                                src="/images/logoFC.png" style="height:20px"/></a>
+                    <% } %>
+                </div>
+                <div class="span12 hidden-desktop">
+                    <% if (user) { %>
+                    <span class="" style="font-size: 16px; font-weight: bold; color: #EEE;">Merci de vous être identifié,
+                        <%= user %>. <br/>
+                        <button class="btn btn-default" onclick="window.location = '/logout'">Se
+                            déconnecter
+                        </button>
+                    </span>
                     <% } else { %>
                     <p>Pour accéder à la démarche en ligne, il faut vous identifier.</p>
-				    <span class="span2 pull-right">
+				    <span class="span2">
                         <a id="fc_login" class="btn btn-large" href="/login_org">
                             <img src="/images/logoFC.png" style="height:20px"/>
                         </a>
