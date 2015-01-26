@@ -73,12 +73,15 @@
                                  alt="©Sophie Robichon/Mairie de Paris" width="400" height="305">
                         </div>
                         <div class="span6 well well-small">
-                            <h2>Merci de vérifier les données suivantes :</h2>
-                            <p>Votre revenu fiscal de référence est : <b><%= data %> euros</b>.</p>
-                            <p>Pour votre enfant <b><%= informationsCantine.prenomEnfant + ' '+ informationsCantine.nomEnfant%></b>.</p>
-                            <p>Le montant à régler pour un repas de cantine sera de <b>3.64 euros</b>.</p>
+                            <h2>Votre inscription est confirmée :</h2>
+                            <p>Pour votre enfant <strong><%= informationsCantine.prenomEnfant + ' '+ informationsCantine.nomEnfant%></strong>,
+                                le montant à régler pour un repas de cantine sera de <strong><em class="underline">3.64 euros</em></strong>.</p>
+                            <p><em>Pour information, votre revenu fiscal utilisé pour calculer le montant du règlement est de <%= data %> euros.
+                            Cette information provient directement de l'administration fiscale.</em></p>
+                            <p><em>Pour information, votre adresse est 20 rue Desaix, 75015 Paris. Cette information provient directement d'EDF.</em></p>
+                            <p><em>Pour information, votre RIB est 400052105410334165. Cette information provient directement de l'assurance maladie.</em></p>
                             <p>
-                                <a href="/data/fin-demarche" class="btn btn-large">Poursuivre</a>
+                                <a href="/data/fin-demarche" class="btn btn-large">Valider</a>
                             </p>
                         </div>
                     </div>

@@ -13,3 +13,8 @@ a {
   padding: 0;
   width: 970px;
 }
+
+em .underline {
+  font-style: normal;
+  text-decoration: underline;
+}
