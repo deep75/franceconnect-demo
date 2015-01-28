@@ -31,7 +31,6 @@ passport.deserializeUser(function (obj, done) {
 
 //1st step
 router.get('/', function (req, res, next) {
-    req.session.user = req.session.passport.user;
     next();
 }, passport.authenticate('provider'), function (req, res, next) {
     console.log('got through the oauth2 authentication process.');
@@ -39,7 +38,6 @@ router.get('/', function (req, res, next) {
 
 router.get('/form', function(req, res, next){
     if(req.session.passport.user){
-        console.log(req.session.passport.user);
         res.render('demarche-form.ejs', {title: 'Démonstrateur France Connect - Inscription à la cantine scolaire', user:req.session.user, userInfo:req.session.passport.user});
     } else {
         res.redirect('/');
@@ -61,7 +59,6 @@ router.get('/callback', passport.authenticate('provider', {
     console.log('got to the callback URL, at this point we should ve obtained an access token');
 });
 
-var request = require('request');
 router.get('/authOk', function (req, res, next) {
     var options = {
         url: config.quotientFamilialURL,
@@ -113,13 +110,13 @@ router.get('/authKo', function (req, res, next) {
 
 router.get('/done', function (req, res, next) {
     console.log(req.session.cantineParams);
-    res.render('demarche-etape2.ejs', {title: 'Démonstrateur France Connect - Inscription à la cantine scolaire', user: req.session.user.displayName, data: req.session.passport.user.quotientFamilial, informationsCantine:req.session.cantineParams});
+    res.render('demarche-etape2.ejs', {title: 'Démonstrateur France Connect - Inscription à la cantine scolaire', user: req.session.user, data: req.session.passport.user.quotientFamilial, informationsCantine:req.session.cantineParams});
 });
 
 
 router.get('/fin-demarche', function(req, res){
     if(req.session.user){
-        res.render('demarche-fin.ejs', {title: 'Démonstrateur France Connect - Inscription à la cantine scolaire', user:req.session.user.displayName});
+        res.render('demarche-fin.ejs', {title: 'Démonstrateur France Connect - Inscription à la cantine scolaire', user: req.session.user});
     } else {
         res.redirect('/');
     }
