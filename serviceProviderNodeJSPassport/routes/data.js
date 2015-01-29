@@ -4,7 +4,7 @@ var router = express.Router();
 var request = require('request');
 var config = (new (require('../helpers/configManager.js'))())._rawConfig;
 var Oauth2Strategy = require('passport-oauth').OAuth2Strategy;
-
+var _ = require('lodash');
 
 passport.use('provider', new Oauth2Strategy({
         authorizationURL: config.oauth.authorizationURL,
@@ -12,7 +12,7 @@ passport.use('provider', new Oauth2Strategy({
         clientID: config.openIdConnectStrategyParameters.clientID,
         clientSecret: config.openIdConnectStrategyParameters.clientSecret,
         callbackURL: config.oauth.callbackURL,
-        scope:config.oauth.scopes
+        scope: config.oauth.scopes
     },
     function (accessToken, refreshToken, profile, done) {
         profile.accessToken = accessToken;
@@ -36,15 +36,19 @@ router.get('/', function (req, res, next) {
     console.log('got through the oauth2 authentication process.');
 });
 
-router.get('/form', function(req, res, next){
-    if(req.session.passport.user){
-        res.render('demarche-form.ejs', {title: 'Démonstrateur France Connect - Inscription à la cantine scolaire', user:req.session.user, userInfo:req.session.passport.user});
+router.get('/form', function (req, res, next) {
+    if (req.session.passport.user) {
+        res.render('demarche-form.ejs', {
+            title: 'Démonstrateur France Connect - Inscription à la cantine scolaire',
+            user: req.session.user,
+            userInfo: req.session.passport.user
+        });
     } else {
         res.redirect('/');
     }
 });
 
-router.post('/form', function(req, res){
+router.post('/form', function (req, res) {
     console.log(req.params);
     req.session.cantineParams = req.body;
     res.redirect('/data/');
@@ -109,14 +113,24 @@ router.get('/authKo', function (req, res, next) {
 });
 
 router.get('/done', function (req, res, next) {
-    console.log(req.session.cantineParams);
-    res.render('demarche-etape2.ejs', {title: 'Démonstrateur France Connect - Inscription à la cantine scolaire', user: req.session.user, data: req.session.passport.user.quotientFamilial, informationsCantine:req.session.cantineParams});
+    if (_.isUndefined(req.session) || _.isUndefined(req.session.user) || _.isUndefined(req.session.passport) || _.isUndefined(req.session.passport.user) || _.isUndefined(req.session.passport.user.quotientFamilial) || _.isUndefined(req.session.cantineParams)) {
+        res.redirect('/');
+    }
+    res.render('demarche-etape2.ejs', {
+        title: 'Démonstrateur France Connect - Inscription à la cantine scolaire',
+        user: req.session.user,
+        data: req.session.passport.user.quotientFamilial,
+        informationsCantine: req.session.cantineParams
+    });
 });
 
 
-router.get('/fin-demarche', function(req, res){
-    if(req.session.user){
-        res.render('demarche-fin.ejs', {title: 'Démonstrateur France Connect - Inscription à la cantine scolaire', user: req.session.user});
+router.get('/fin-demarche', function (req, res) {
+    if (req.session.user) {
+        res.render('demarche-fin.ejs', {
+            title: 'Démonstrateur France Connect - Inscription à la cantine scolaire',
+            user: req.session.user
+        });
     } else {
         res.redirect('/');
     }
