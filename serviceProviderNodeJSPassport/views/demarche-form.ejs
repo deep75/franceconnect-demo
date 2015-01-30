@@ -42,56 +42,59 @@
                                  alt="©Sophie Robichon/Mairie de Paris" width="400" height="305">
                         </div>
                         <div class="span6 well well-small">
-                            <form class="form-horizontal" method="POST" id="crecheForm">
+                            <form method="POST" id="crecheForm" class="form-horizontal" style="margin-left:20px;">
                                 <fieldset>
 
                                     <!-- Form Name -->
                                     <legend>Vérifiez et complétez les informations suivantes :*</legend>
 
                                     <!-- Text input-->
-                                    <div class="control-group">
-                                        <label class="control-label" for="textinput-0">Nom</label>
+                                    <div class="form-group row">
 
-                                        <div class="controls">
-                                            <input id="textinput-0" name="textinput-0" type="text" placeholder=""
-                                                   class="input-large" disabled value="<%= userInfo.name.familyName %>">
+                                            <label class="control-label span4" for="textinput-0" style="text-align:right;float:left;">Nom</label>
 
-                                        </div>
+                                            <div class="controls">
+                                                <input id="textinput-0" name="textinput-0" type="text" placeholder=""
+                                                       class="input-large span8" disabled value="<%= userInfo.name.familyName %>">
+
+                                            </div>
+
+
                                     </div>
 
+
                                     <!-- Text input-->
-                                    <div class="control-group">
-                                        <label class="control-label" for="textinput-1">Prénom</label>
+                                    <div class="form-group row">
+                                        <label class="control-label span4" for="textinput-1" style="text-align:right;float:left;">Prénom</label>
 
                                         <div class="controls">
                                             <input id="textinput-1" name="textinput-1" type="text" placeholder=""
-                                                   class="input-large" disabled value="<%= userInfo.name.givenName %>">
+                                                   class="input-large span8" disabled value="<%= userInfo.name.givenName %>">
 
                                         </div>
                                     </div>
 
                                     <!-- Text input-->
-                                    <div class="control-group">
-                                        <label class="control-label" for="nomEnfant">Nom de votre enfant</label>
+                                    <div class="form-group row">
+                                        <label class="control-label span4" for="nomEnfant" style="text-align:right;float:left;">Nom de votre enfant</label>
 
                                         <div class="controls">
                                             <input id="nomEnfant" name="nomEnfant" type="text" placeholder=""
-                                                   class="input-large">
+                                                   class="input-large span8" required="">
 
                                         </div>
                                     </div>
 
                                     <!-- Text input-->
-                                    <div class="control-group">
-                                        <label class="control-label" for="prenomEnfant">Prénom de votre enfant</label>
+                                    <div class="form-group row">
+                                        <label class="control-label span4" for="prenomEnfant" style="text-align:right;float:left;">Prénom de votre enfant</label>
 
                                         <div class="controls">
                                             <input id="prenomEnfant" name="prenomEnfant" type="text" placeholder=""
-                                                   class="input-large">
+                                                   class="input-large span8" required="">
 
                                         </div>
                                     </div>
-
                                 </fieldset>
                                 <input type="submit" value="Confirmer" class="btn btn-large"> <br/>
                                 <span style="text-size:8px">* Vous allez ensuite être redirigé vers une page qui va vous montrer les données auxquelles va accéder le service pour compléter votre demande. Nous aurons besoin de votre consentement.</span>
