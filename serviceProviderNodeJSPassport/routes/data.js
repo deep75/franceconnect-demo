@@ -109,7 +109,7 @@ router.get('/authOk', function (req, res, next) {
     });
 });
 router.get('/authKo', function (req, res, next) {
-    res.redirect('/demarche/etape1');
+    res.redirect('/');
 });
 
 router.get('/done', function (req, res, next) {
