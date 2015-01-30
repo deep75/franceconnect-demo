@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
+<META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
+
 <!-- Set the viewport width to device width for mobile -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Le styles -->
@@ -27,6 +29,18 @@
 <!-- modale France Connect -->
 <link rel="stylesheet" href="/stylesheets/jquery.fancybox.css" type="text/css" media="screen"/>
 <link rel="stylesheet" href="/stylesheets/jquery.fancybox-buttons.css" type="text/css" media="screen"/>
+
+<script>
+    $.ajax('/get-user-displayable-data', {})
+            .success(function(data){
+                console.log(data);
+                if(data.user){
+                    $("#fcLoginButton").hide();
+                    $("#fcUserName").html(data.user);
+                    $("#fcHelloSpan").show();
+                }
+            });
+</script>
 
 <style>
     .fancybox-next {

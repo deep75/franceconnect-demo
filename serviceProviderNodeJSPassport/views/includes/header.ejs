@@ -24,7 +24,15 @@
                     </span>
                     </div>
                     <% } else { %>
-                    <a class="btn btn-large fancybox pull-right" style="width: 220px" rel="group"
+                    <div id="fcHelloSpan" class="span7" style="display:none">
+                    <span class="pull-right" style="font-size: 16px; font-weight: bold; color: #EEE;">Merci de vous être identifié,
+                        <span id="fcUserName"></span>. <br/>
+                        <button class="btn btn-default pull-right" onclick="window.location = '/logout'">Se
+                            déconnecter
+                        </button>
+                    </span>
+                    </div>
+                    <a id="fcLoginButton" class="btn btn-large fancybox pull-right" style="width: 220px" rel="group"
                        href="#fc_login_popin" scrolling="auto"
                        modal="true" autoHeight="false" autoSize="false" width="500px" height="750px"><img
                                 src="/images/logoFC.png"/></a>

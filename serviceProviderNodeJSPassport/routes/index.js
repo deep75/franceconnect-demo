@@ -57,4 +57,8 @@ router.get('/blank', function (req, res) {
     res.render('wait_screen');
 });
 
+router.get('/get-user-displayable-data', function(req, res){
+   res.json({user:req.session.user});
+});
+
 module.exports = router;
