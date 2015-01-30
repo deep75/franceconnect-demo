@@ -38,6 +38,7 @@ router.get('/', function (req, res, next) {
 
 router.get('/form', function (req, res, next) {
     if (req.session.passport.user) {
+        req.session.user = req.session.passport.user.name.givenName + " " + req.session.passport.user.name.familyName;
         res.render('demarche-form.ejs', {
             title: 'Démonstrateur France Connect - Inscription à la cantine scolaire',
             user: req.session.user,
@@ -103,7 +104,7 @@ router.get('/authOk', function (req, res, next) {
             }
         }
         else {
-            req.session.passport.user.quotientFamilial = JSON.parse(body);
+            req.session.quotientFamilial = JSON.parse(body);
             res.redirect('/data/done');
         }
     });
@@ -113,13 +114,13 @@ router.get('/authKo', function (req, res, next) {
 });
 
 router.get('/done', function (req, res, next) {
-    if (_.isUndefined(req.session) || _.isUndefined(req.session.user) || _.isUndefined(req.session.passport) || _.isUndefined(req.session.passport.user) || _.isUndefined(req.session.passport.user.quotientFamilial) || _.isUndefined(req.session.cantineParams)) {
+    if (_.isUndefined(req.session) || _.isUndefined(req.session.user) || _.isUndefined(req.session.passport) || _.isUndefined(req.session.passport.user) || _.isUndefined(req.session.quotientFamilial) || _.isUndefined(req.session.cantineParams)) {
         res.redirect('/');
     }
     res.render('demarche-etape2.ejs', {
         title: 'Démonstrateur France Connect - Inscription à la cantine scolaire',
         user: req.session.user,
-        data: req.session.passport.user.quotientFamilial,
+        data: req.session.quotientFamilial,
         informationsCantine: req.session.cantineParams
     });
 });
