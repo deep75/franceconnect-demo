@@ -6,37 +6,22 @@
 <body>
 <% include includes/header.ejs %>
 
-<!-- container -->
-<div class="container">
-    <div class="wrapper">
-
-
-        <div class="row-fluid">
-            <div class="span12">
-                <div class="portlet ">
-                    <h3>Accéder à votre compte</h3>
-
-                    <div class="row-fluid">
-                        <div class="span5">
-                            <img title="Main sur formulaire" src="/Guichet%20Parisiens%20-%20accueil_files/main.jpg"
-                                 alt="©Sophie Robichon/Mairie de Paris" width="400" height="305">
-                        </div>
-                        <div class="span6 well well-small">
-                            <h2>Merci !</h2>
-                            <p>Votre demande a bien été prise en compte.</p>
-                            <p style="display: none">
-                                <a class="btn btn-large"
-                                   href="https://guichet.paris.fr/crm/jsp/site/Portal.jsp?page=myluteceusergu&action=createAccount&back_url=https%3A%2F%2Fguichet.paris.fr%2Fcrm%2Fjsp%2Fsite%2FPortal.jsp%3Fpage_id%3D1">S'inscrire</a>
-                            </p>
-                        </div>
-                    </div>
-                    <p>&nbsp;</p>
-                </div>
-
-            </div>
-        </div>
+<div class="container-fluid">
+    <div class="row-fluid">
         <% include includes/voirie-panel.ejs %>
+
+        <div class="span6 well well-small">
+            <h2>Merci !</h2>
+
+            <p>Votre demande a bien été prise en compte.</p>
+
+            <p style="display: none">
+                <a class="btn btn-large"
+                   href="https://guichet.paris.fr/crm/jsp/site/Portal.jsp?page=myluteceusergu&action=createAccount&back_url=https%3A%2F%2Fguichet.paris.fr%2Fcrm%2Fjsp%2Fsite%2FPortal.jsp%3Fpage_id%3D1">S'inscrire</a>
+            </p>
+        </div>
     </div>
+    <p>&nbsp;</p>
 </div>
 <% include includes/footer %>
 </body>

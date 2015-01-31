@@ -1,48 +1,21 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <% include includes/includes %>
-</head>
-<body>
 <% include includes/header.ejs %>
-
-<!-- container -->
-<div class="container">
-    <div class="wrapper">
-        <div class="row-fluid">
-            <div class="span12">
-                <div class="portlet">
-                    <div class="row-fluid">
-                        <div class="span5 hidden-phone hidden-tablet">
-                            <img title="Main sur formulaire" src="/Guichet%20Parisiens%20-%20accueil_files/main.jpg"
-                                 alt="©Sophie Robichon/Mairie de Paris" width="400" height="305">
-                        </div>
-                        <div class="span7 well well-small" style="height: 290px">
-                            <h2>Inscrivez vos enfants à la crèche via FranceConnect :</h2>
-                            <ul>
-                                <li>Connectez-vous simplement avec avec le compte de votre choix
-                                </li>
-                                <li>Récupérez automatiquement les informations personnelles nécessaires à la démarche
-                                </li>
-                            </ul>
-                            <br/>
-
-                            <p>
-                                <a class="btn btn-large btn-primary fancybox pull-right" rel="group"
-                                   href="#fc_login_popin" scrolling="auto"
-                                   modal="true" autoHeight="false" autoSize="false" width="500px" height="750px">Démarrer
-                                    la démarche via FranceConnect</a>
-                            </p>
-                        </div>
-                    </div>
-                    <p>&nbsp;</p>
-                </div>
-            </div>
-        </div>
-        <% include includes/voirie-panel.ejs %>
-
+<div class="row-fluid">
+    <% include includes/voirie-panel.ejs %>
+    <div class="span6 well">
+        <h2>Inscrivez vos enfants à la crèche via FranceConnect :</h2>
+        <ul>
+            <li>Connectez-vous simplement avec avec le compte de votre choix
+            </li>
+            <li>Récupérez automatiquement les informations personnelles nécessaires à la démarche
+            </li>
+        </ul>
+        <a class="btn btn-large btn-primary fancybox hidden-phone hidden-tablet" rel="group"
+           href="#fc_login_popin" scrolling="auto"
+           modal="true" autoHeight="false" autoSize="false" width="500px" height="750px">Démarrer
+            la démarche via FranceConnect</a>
+        <a id="fc_login" class="hidden-desktop btn btn-large" href="/login_org" style="width:220px">
+            <img src="/images/LogoFC-mini-180x37.png"/>
+        </a>
     </div>
 </div>
 <% include includes/footer %>
-</body>
-</html>

@@ -1,55 +1,48 @@
-<header role="banner">
-    <div id="banner">
-        <div class="container">
-            <div class="row">
-                <div class="span12">
-                    <a>
-                    </a>
-                </div>
-            </div>
-            <div class="row">
-                <div class="span5">
-                    <h1>
-                        <a>GUICHET DES PARISIENS</a>
-                    </h1>
-                </div>
-                <div class="hidden-phone hidden-tablet" style="padding-top: 15px">
-                    <% if (user) { %>
-                    <div class="span7">
-                    <span class="pull-right" style="font-size: 16px; font-weight: bold; color: #EEE;">Merci de vous être identifié,
-                        <%= user %>. <br/>
-                        <button class="btn btn-default pull-right" onclick="window.location = '/logout'">Se
-                            déconnecter
-                        </button>
-                    </span>
-                    </div>
-                    <% } else { %>
-                    <a class="btn btn-large fancybox pull-right" style="width: 220px" rel="group"
-                       href="#fc_login_popin" scrolling="auto"
-                       modal="true" autoHeight="false" autoSize="false" width="500px" height="750px"><img
-                                src="/images/logoFC.png"/></a>
-                    <% } %>
-                </div>
-                <div class="span12 hidden-desktop">
-                    <% if (user) { %>
-                    <span class="" style="font-size: 16px; font-weight: bold; color: #EEE;">Merci de vous être identifié,
-                        <%= user %>. <br/>
+<% include ./includes %>
+<div class="container-fluid">
+    <div id="banner" class="row-fluid">
+        <div class="span3 offset1">
+            <h2 style="color: white">GUICHET DES PARISIENS</h2>
+        </div>
+        <div class="span12 hidden-phone hidden-tablet">
+
+            <% if (user) { %>
+            <span class="span2 offset4" style="color:white">Merci de vous être identifié,
+                <%= user %>. <br/>
                         <button class="btn btn-default" onclick="window.location = '/logout'">Se
                             déconnecter
                         </button>
                     </span>
-                    <% } else { %>
-                    <p>Pour accéder à la démarche en ligne, il faut vous identifier :</p>
+            <% } else { %>
+            <div class="span2 offset5" style="color: white">
+                Identifiez-vous :
+                <a id="fc_login" class="btn btn-large" href="/login_org" style="width:220px">
+                    <img src="/images/LogoFC-mini-180x37.png"/>
+                </a>
+            </div>
+            <% } %>
+        </div>
+        <div class="span12 hidden-desktop">
+            <% if (user) { %>
+            <span class="" style="font-size: 16px; font-weight: bold; color: #EEE;">Merci de vous être identifié,
+                <%= user %>. <br/>
+                        <button class="btn btn-default" onclick="window.location = '/logout'">Se
+                            déconnecter
+                        </button>
+                    </span>
+            <% } else { %>
+            <p>Pour accéder à la démarche en ligne, il faut vous identifier :</p>
 				    <span class="span2">
                         <a id="fc_login" class="btn btn-large" href="/login_org" style="width:220px">
                             <img src="/images/LogoFC-mini-180x37.png"/>
                         </a>
                     </span>
-                    <% } %>
-                </div>
-            </div>
+            <% } %>
         </div>
     </div>
+</div>
+</div>
+</div>
 </header>
 
 <div id="fc_login_popin" style="display: none">

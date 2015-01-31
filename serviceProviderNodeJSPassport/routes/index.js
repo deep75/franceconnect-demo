@@ -43,7 +43,7 @@ router.get('/demarche/etape1', function (req, res) {
 });
 
 router.get('/get-data', function (req, res) {
-    res.redirect(302, config.oauthProviderURL + '?client_id=123&scope=data&redirect_uri=' + config.oauth2AllowCallbackURL);
+    res.redirect(302, config.authorizationURL + '?client_id=123&scope=data&redirect_uri=' + config.oauth2AllowCallbackURL);
 });
 
 router.get('/logout', function (req, res) {

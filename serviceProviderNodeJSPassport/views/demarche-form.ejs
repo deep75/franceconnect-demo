@@ -1,121 +1,70 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <% include includes/includes %>
-</head>
-<body>
 <% include includes/header.ejs %>
+<div class="row-fluid">
+    <% include includes/voirie-panel.ejs %>
+    <div class="span6 well">
+        <form method="POST" id="crecheForm" class="form-horizontal">
+            <fieldset>
 
-<!-- container -->
-<div class="container">
-    <div class="wrapper">
+                <!-- Form Name -->
+                <legend>Vérifiez et complétez les informations suivantes :*</legend>
 
+                <!-- Text input-->
+                <div class="form-group row">
 
-        <div class="row-fluid">
-            <div class="span12">
-                <div class="portlet ">
-                    <ul class="nav nav-tabs hidden-phone hidden-tablet">
-                        <li class="active">
-                            <a class="tb" href="https://guichet.paris.fr/crm/jsp/site/Portal.jsp">Accueil</a>
-                        </li>
-                        <li>
-                            <a class="tb" href="https://guichet.paris.fr/crm/jsp/site/Portal.jsp?page=crm#panel2">Mes
-                                demandes</a>
-                        </li>
-                        <li>
-                            <a class="tb" href="https://guichet.paris.fr/crm/jsp/site/Portal.jsp?page=crm#panel3">Mes
-                                brouillons</a>
-                        </li>
-                        <li>
-                            <a class="tb" href="https://guichet.paris.fr/crm/jsp/site/Portal.jsp?page=crm#panel4">Mon
-                                compte</a>
-                        </li>
-                    </ul>
-                </div>
+                    <label class="control-label span4" for="textinput-0"
+                           style="text-align:right;float:left;">Nom</label>
 
-                <div class="portlet ">
-                    <h3>Accéder à votre compte</h3>
+                    <div class="controls">
+                        <input id="textinput-0" name="textinput-0" type="text" placeholder=""
+                               class="input-large span8" disabled
+                               value="<%= userInfo.name.familyName %>">
 
-                    <div class="row-fluid">
-                        <div class="span5">
-                            <img title="Main sur formulaire" src="/Guichet%20Parisiens%20-%20accueil_files/main.jpg"
-                                 alt="©Sophie Robichon/Mairie de Paris" width="400" height="305">
-                        </div>
-                        <div class="span6 well well-small">
-                            <form method="POST" id="crecheForm" class="form-horizontal" style="margin-left:20px;">
-                                <fieldset>
-
-                                    <!-- Form Name -->
-                                    <legend>Vérifiez et complétez les informations suivantes :*</legend>
-
-                                    <!-- Text input-->
-                                    <div class="form-group row">
-
-                                            <label class="control-label span4" for="textinput-0" style="text-align:right;float:left;">Nom</label>
-
-                                            <div class="controls">
-                                                <input id="textinput-0" name="textinput-0" type="text" placeholder=""
-                                                       class="input-large span8" disabled value="<%= userInfo.name.familyName %>">
-
-                                            </div>
-
-
-                                    </div>
-
-
-                                    <!-- Text input-->
-                                    <div class="form-group row">
-                                        <label class="control-label span4" for="textinput-1" style="text-align:right;float:left;">Prénom</label>
-
-                                        <div class="controls">
-                                            <input id="textinput-1" name="textinput-1" type="text" placeholder=""
-                                                   class="input-large span8" disabled value="<%= userInfo.name.givenName %>">
-
-                                        </div>
-                                    </div>
-
-                                    <!-- Text input-->
-                                    <div class="form-group row">
-                                        <label class="control-label span4" for="nomEnfant" style="text-align:right;float:left;">Nom de votre enfant</label>
-
-                                        <div class="controls">
-                                            <input id="nomEnfant" name="nomEnfant" type="text" placeholder=""
-                                                   class="input-large span8" required="">
-
-                                        </div>
-                                    </div>
-
-                                    <!-- Text input-->
-                                    <div class="form-group row">
-                                        <label class="control-label span4" for="prenomEnfant" style="text-align:right;float:left;">Prénom de votre enfant</label>
-
-                                        <div class="controls">
-                                            <input id="prenomEnfant" name="prenomEnfant" type="text" placeholder=""
-                                                   class="input-large span8" required="">
-
-                                        </div>
-                                    </div>
-                                </fieldset>
-                                <input type="submit" value="Confirmer" class="btn btn-large"> <br/>
-                                <span style="text-size:8px">* Vous allez ensuite être redirigé vers une page qui va vous montrer les données auxquelles va accéder le service pour compléter votre demande. Nous aurons besoin de votre consentement.</span>
-                            </form>
-                            <!--<a class="btn btn-large"-->
-                            <!--href="#" id="getData" onclick="function(e){e.preventDefault();$('#crecheForm').submit();">Confirmer</a>-->
-
-                            <p style="display: none">
-                                <a class="btn btn-large"
-                                   href="https://guichet.paris.fr/crm/jsp/site/Portal.jsp?page=myluteceusergu&action=createAccount&back_url=https%3A%2F%2Fguichet.paris.fr%2Fcrm%2Fjsp%2Fsite%2FPortal.jsp%3Fpage_id%3D1">S'inscrire</a>
-                            </p>
-                        </div>
                     </div>
-                    <p>&nbsp;</p>
+
+
                 </div>
 
-            </div>
-        </div>
-        <% include includes/voirie-panel.ejs %>
+
+                <!-- Text input-->
+                <div class="form-group row">
+                    <label class="control-label span4" for="textinput-1"
+                           style="text-align:right;float:left;">Prénom</label>
+
+                    <div class="controls">
+                        <input id="textinput-1" name="textinput-1" type="text" placeholder=""
+                               class="input-large span8" disabled
+                               value="<%= userInfo.name.givenName %>">
+
+                    </div>
+                </div>
+
+                <!-- Text input-->
+                <div class="form-group row">
+                    <label class="control-label span4" for="nomEnfant"
+                           style="text-align:right;float:left;">Nom de votre enfant</label>
+
+                    <div class="controls">
+                        <input id="nomEnfant" name="nomEnfant" type="text" placeholder=""
+                               class="input-large span8" required="">
+
+                    </div>
+                </div>
+
+                <!-- Text input-->
+                <div class="form-group row">
+                    <label class="control-label span4" for="prenomEnfant"
+                           style="text-align:right;float:left;">Prénom de votre enfant</label>
+
+                    <div class="controls">
+                        <input id="prenomEnfant" name="prenomEnfant" type="text" placeholder=""
+                               class="input-large span8" required="">
+
+                    </div>
+                </div>
+            </fieldset>
+            <input type="submit" value="Confirmer" class="btn btn-large"> <br/>
+            <span style="text-size:8px">* Vous allez ensuite être redirigé vers une page qui va vous montrer les données auxquelles va accéder le service pour compléter votre demande. Nous aurons besoin de votre consentement.</span>
+        </form>
     </div>
 </div>
 <% include includes/footer %>
-</body>
-</html>
