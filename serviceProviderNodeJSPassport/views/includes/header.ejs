@@ -1,7 +1,8 @@
 <% include ./includes %>
 <div class="container-fluid">
     <div id="banner" class="row-fluid">
-        <div class="span3 offset1">
+        <div class="span1"></div>
+        <div class="span3">
             <h2 style="color: white">GUICHET DES PARISIENS</h2>
         </div>
         <div class="span8 hidden-phone">
@@ -13,16 +14,17 @@
                         </button>
                     </span>
             <% } else { %>
-            <div class="span3 offset5" style="color:white">
-                Identifiez-vous :
-                <a class="btn btn-large fancybox" style="width: 220px" rel="group"
+            <div class="span4 offset5" style="color:white; text-align: right">
+                <span>Identifiez-vous avec FranceConnect :</span>
+                <br/>
+                <a class="btn btn-large fancybox" rel="group"
                    href="#fc_login_popin" scrolling="auto"
                    modal="true" autoHeight="false" autoSize="false" width="500px" height="750px"><img
                             src="/images/logoFC.png"/></a>
             </div>
             <% } %>
         </div>
-        <div class="hidden-desktop hidden-tablet">
+        <div class="span8 hidden-desktop hidden-tablet">
             <% if (user) { %>
             <div class="span" style="color:white">Merci de vous être identifié,
                 <%= user %>. <br/>
@@ -32,15 +34,14 @@
             </div>
             <% } else { %>
             <div style="color:white">
-                Identifiez-vous :
-                <a id="fc_login" class="btn btn-large" href="/login_org" style="width:220px">
+                Identifiez-vous avec FranceConnect :<br/>
+                <a id="fc_login" class="btn btn-large" href="/login_org" style="max-width: 220px">
                     <img src="/images/LogoFC-mini-180x37.png"/>
                 </a>
             </div>
             <% } %>
         </div>
     </div>
-</div>
 
 <div id="fc_login_popin" style="display: none">
 </div>

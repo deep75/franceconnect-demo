@@ -1,6 +1,7 @@
 body {
     width: 100%;
     padding: 0px;
+    font-size: large;
 }
 
 /* Banner styles */
@@ -10,8 +11,37 @@ body {
     padding-top: 30px;
     padding-bottom: 30px;
     margin-bottom: 40px;
-    padding-left: 10px;
-    padding-right: 10px;
+}
+
+.well-gu {
+    background-color: #1A9CAF;
+    color: #fff;
+    padding: 0px;
+    -webkit-box-shadow: 5px 4px 8px rgba(0, 0, 0, 0.46);
+    -moz-box-shadow: 5px 4px 8px rgba(0, 0, 0, 0.46);
+    box-shadow: 5px 4px 8px rgba(0, 0, 0, 0.46);
+}
+
+.well-gu h4 {
+    border-bottom: 2px dotted #fff;
+    background-color: #fff;
+    color: #000;
+    padding: 10px 10px;
+    margin: 0;
+}
+
+.well-gu ul {
+    padding: 10px;
+}
+
+.well-gu ul li {
+    border-bottom: 2px dotted #fff;
+    padding: 5px 0 5px 15px;
+    color: white;
+}
+
+.well-gu ul li a {
+    color: white;
 }
 
 /* FOOTER STYLES */
@@ -21,6 +51,7 @@ body {
     padding: 20px;
     margin-top: 40px;
     width: 100%;
+    font-size: medium;
 }
 
 .footer h3 {
@@ -74,9 +105,14 @@ ul.social li {
 
 .container-fluid {
     padding-left: 0px;
+    padding-right: 0px;
 }
 
 .row-fluid {
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.span3, .span1, .span2, .span8 {
+    padding: 10px;
 }
