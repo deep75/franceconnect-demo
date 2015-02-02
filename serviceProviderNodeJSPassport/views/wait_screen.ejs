@@ -2,5 +2,18 @@
 <body>
 <p>Redirection vers la page d'accueil...</p>
 </body>
-<script type="text/javascript">parent.postMessage('message', '*'); this.window.location.href = '/data/form'</script>
+<script type="text/javascript">
+    function inIframe() {
+        try {
+            return window.self !== window.top;
+        } catch (e) {
+            return true;
+        }
+    }
+    if (inIframe()) {
+        parent.postMessage('message', '*');
+    } else {
+        this.window.location.href = '/'
+    }
+</script>
 </html>
