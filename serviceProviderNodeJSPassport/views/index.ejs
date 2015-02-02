@@ -1,21 +1,33 @@
 <% include includes/header.ejs %>
 <div class="row-fluid">
     <% include includes/voirie-panel.ejs %>
+
     <div class="span6 well">
-        <h2>Inscrivez vos enfants à la crèche via FranceConnect :</h2>
+        <% if (user) { %>
+
+        <h2>Inscrivez vos enfants à la cantine municipale via FranceConnect :</h2>
         <ul>
             <li>Connectez-vous simplement avec avec le compte de votre choix
             </li>
             <li>Récupérez automatiquement les informations personnelles nécessaires à la démarche
             </li>
         </ul>
-        <a class="btn btn-large btn-primary fancybox hidden-phone hidden-tablet" rel="group"
-           href="#fc_login_popin" scrolling="auto"
-           modal="true" autoHeight="false" autoSize="false" width="500px" height="750px">Démarrer
+        <a class="btn btn-large btn-primary" rel="group"
+           href="/data/form">Démarrer
             la démarche via FranceConnect</a>
-        <a class="hidden-desktop btn btn-large" href="/login_org" style="width:220px">
-            <img src="/images/LogoFC-mini-180x37.png"/>
         </a>
+        <% } else { %>
+        <h2>Avec le Guichet des Parisiens vous pouvez :</h2>
+
+        <ul>
+            <li>Accéder aux différentes démarches administratives en ligne de la ville de Paris</li>
+            <li>Retouver l'historique de vos demandes dans votre espace personnel
+            </li>
+            <li>Etre informé de l'état d'avancement de l'instruction de vos demandes</li>
+        </ul>
+
+        <h4>Identifiez-vous pour accéder aux démarches</h4>
+        <% } %>
     </div>
 </div>
 <% include includes/footer %>

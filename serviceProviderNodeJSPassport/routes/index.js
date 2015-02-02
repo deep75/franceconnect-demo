@@ -5,7 +5,13 @@ var config = (new (require('../helpers/configManager.js'))())._rawConfig;
 var url = require('url');
 
 router.get('/', function (req, res) {
+    if (req.session.passport.user !== undefined) {
+        var given_name = (req.session.passport.user._json.given_name) ? req.session.passport.user._json.given_name : '';
+        var family_name = (req.session.passport.user._json.family_name) ? req.session.passport.user._json.family_name : '';
+        req.session.user = given_name + ' ' + family_name;
+    }
     res.render('index', {title: 'Démonstrateur France Connect - Accueil', user: req.session.user});
+
 });
 
 router.get('/login_org', passport.authenticate('openidconnect'), function (req, res) {
@@ -36,7 +42,10 @@ router.get('/demarche/etape1', function (req, res) {
         var family_name = (req.session.passport.user._json.family_name) ? req.session.passport.user._json.family_name : '';
         req.session.user = given_name + ' ' + family_name;
 
-        res.render('demarche-etape1', {title: 'Démonstrateur France Connect - Inscription à la cantine scolaire', user: req.session.user});
+        res.render('demarche-etape1', {
+            title: 'Démonstrateur France Connect - Inscription à la cantine scolaire',
+            user: req.session.user
+        });
     } else {
         res.redirect(302, '/');
     }
@@ -49,7 +58,7 @@ router.get('/get-data', function (req, res) {
 router.get('/logout', function (req, res) {
     req.session.destroy();
     var parsedUrl = url.parse(config.oauth.authorizationURL);
-    var logoutUrl = parsedUrl.protocol +'//'+ parsedUrl.host + '/logout';
+    var logoutUrl = parsedUrl.protocol + '//' + parsedUrl.host + '/logout';
     res.redirect(logoutUrl);
 });
 
@@ -57,8 +66,8 @@ router.get('/blank', function (req, res) {
     res.render('wait_screen');
 });
 
-router.get('/get-user-displayable-data', function(req, res){
-   res.json({user:req.session.user});
+router.get('/get-user-displayable-data', function (req, res) {
+    res.json({user: req.session.user});
 });
 
 module.exports = router;
