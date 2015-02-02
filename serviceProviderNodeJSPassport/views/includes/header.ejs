@@ -7,20 +7,17 @@
         </div>
         <div class="span8 hidden-phone">
             <% if (user) { %>
-            <span class="span3 offset5" style="color:white">Merci de vous être identifié,
-                <%= user %>. <br/>
-                        <button class="btn btn-default" onclick="window.location = '/logout'">Se
-                            déconnecter
-                        </button>
-                    </span>
+            <span class="span3 offset5" style="color:white">Merci de vous être identifié, <%= user %>.<br/>
+                <button class="btn btn-default" onclick="window.location = '/logout'">Se déconnecter</button>
+            </span>
             <% } else { %>
             <div class="span4 offset5" style="color:white; text-align: right">
                 <span>Identifiez-vous avec FranceConnect :</span>
                 <br/>
-                <a class="btn btn-large fancybox" rel="group"
-                   href="#fc_login_popin" scrolling="auto"
-                   modal="true" autoHeight="false" autoSize="false" width="500px" height="750px"><img
-                            src="/images/logoFC.png"/></a>
+                <a class="btn btn-large fancybox" rel="group" href="/login_org" modal="true"
+                   autoHeight="false" autoSize="false">
+                    <img src="/images/logoFC.png"/>
+                </a>
             </div>
             <% } %>
         </div>
@@ -62,20 +59,15 @@
     $(document).ready(function () {
         $(".fancybox").fancybox({
             closeBtn: '<a title="Close" class="fancybox-item fancybox-close" href="javascript:;"></a>',
-            openEffect: 'none',
             closeEffect: 'none',
-            nextEffect: 'none',
-            prevEffect: 'none',
-            scrolling: 'no',
-            padding: 0,
+            height: 600,
             margin: [20, 60, 20, 60],
-            afterLoad: function () {
-                // l'iframe ne doit être insérée dans le DOM que quand l'utilisateur choisit de se connecter, sinon la mécanique de connexion se lance en tâche de fond
-                this.content = '<iframe src="/login_org" style="width: 500px; height: 600px;"></iframe>';
-            }
+            nextEffect: 'none',
+            openEffect: 'none',
+            padding: 0,
+            prevEffect: 'none',
+            type: 'iframe',
+            width: 500
         });
     });
 </script>
-
-
-
