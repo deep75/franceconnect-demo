@@ -116,13 +116,14 @@ router.get('/authKo', function (req, res, next) {
 router.get('/done', function (req, res, next) {
     if (_.isUndefined(req.session) || _.isUndefined(req.session.user) || _.isUndefined(req.session.passport) || _.isUndefined(req.session.passport.user) || _.isUndefined(req.session.quotientFamilial) || _.isUndefined(req.session.cantineParams)) {
         res.redirect('/');
+    } else {
+        res.render('demarche-etape2.ejs', {
+            title: 'Démonstrateur France Connect - Inscription à la cantine scolaire',
+            user: req.session.user,
+            data: req.session.quotientFamilial,
+            informationsCantine: req.session.cantineParams
+        });
     }
-    res.render('demarche-etape2.ejs', {
-        title: 'Démonstrateur France Connect - Inscription à la cantine scolaire',
-        user: req.session.user,
-        data: req.session.quotientFamilial,
-        informationsCantine: req.session.cantineParams
-    });
 });
 
 
