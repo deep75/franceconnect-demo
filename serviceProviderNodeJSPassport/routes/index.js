@@ -70,4 +70,19 @@ router.get('/get-user-displayable-data', function (req, res) {
     res.json({user: req.session.user});
 });
 
+router.get('/debug', function(req, res) {
+    var sessionExists = true;
+    var userExists = true;
+    if (! req.session) {
+        sessionExists = false;
+        userExists = false;
+    }
+    else if (! req.session.passport || ! req.session.passport.user) {
+        userExists = false;
+    }
+    var session = (sessionExists ? req.session : undefined);
+    var userInfo = (userExists ? req.session.passport.user._json : undefined);
+    res.render('debug', {headers:req.headers, session:session, userInfo:userInfo});
+});
+
 module.exports = router;
