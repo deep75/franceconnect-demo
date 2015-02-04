@@ -32,6 +32,10 @@ router.get('/oidc_callback', function (req, res, next) {
             var errorDescription = res.req.query.error_description;
             return res.send({error: {'name': errorName, 'message': errorDescription}});
         }
+
+        // Let's put the userInfo in session for the debug page
+        req.session.userInfo = user._json;
+
         req.logIn(user, function (err) {
             if (err) {
                 return next(err);
@@ -76,18 +80,7 @@ router.get('/get-user-displayable-data', function (req, res) {
 });
 
 router.get('/debug', function(req, res) {
-    var sessionExists = true;
-    var userExists = true;
-    if (! req.session) {
-        sessionExists = false;
-        userExists = false;
-    }
-    else if (! req.session.passport || ! req.session.passport.user) {
-        userExists = false;
-    }
-    var session = (sessionExists ? req.session : undefined);
-    var userInfo = (userExists ? req.session.passport.user._json : undefined);
-    res.render('debug', {headers:req.headers, session:session, userInfo:userInfo});
+    res.render('debug', {headers:req.headers, session:req.session});
 });
 
 module.exports = router;
