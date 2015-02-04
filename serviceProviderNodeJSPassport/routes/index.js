@@ -3,21 +3,9 @@ var passport = require('passport');
 var router = express.Router();
 var config = (new (require('../helpers/configManager.js'))())._rawConfig;
 var url = require('url');
+var indexController = new (require('../controllers/index.js').IndexController)();
 
-router.get('/', function (req, res) {
-    if (req.session.user) {
-        res.render('index', {title: 'Démonstrateur France Connect - Accueil', user: req.session.user});
-    } else {
-        if (req.session.passport.user !== undefined) {
-            var given_name = (req.session.passport.user._json.given_name) ? req.session.passport.user._json.given_name : '';
-            var family_name = (req.session.passport.user._json.family_name) ? req.session.passport.user._json.family_name : '';
-            req.session.user = given_name + ' ' + family_name;
-            res.render('index', {title: 'Démonstrateur France Connect - Accueil', user: req.session.user});
-        } else {
-            res.render('index', {title: 'Démonstrateur France Connect - Accueil', user: undefined});
-        }
-    }
-});
+router.get('/', indexController.handleMain);
 
 router.get('/login_org', passport.authenticate('openidconnect'), function (req, res) {
 });
@@ -32,6 +20,10 @@ router.get('/oidc_callback', function (req, res, next) {
             var errorDescription = res.req.query.error_description;
             return res.send({error: {'name': errorName, 'message': errorDescription}});
         }
+
+        // Let's put the userInfo in session for the debug page
+        req.session.userInfo = user._json;
+
         req.logIn(user, function (err) {
             if (err) {
                 return next(err);
@@ -76,18 +68,7 @@ router.get('/get-user-displayable-data', function (req, res) {
 });
 
 router.get('/debug', function(req, res) {
-    var sessionExists = true;
-    var userExists = true;
-    if (! req.session) {
-        sessionExists = false;
-        userExists = false;
-    }
-    else if (! req.session.passport || ! req.session.passport.user) {
-        userExists = false;
-    }
-    var session = (sessionExists ? req.session : undefined);
-    var userInfo = (userExists ? req.session.passport.user._json : undefined);
-    res.render('debug', {headers:req.headers, session:session, userInfo:userInfo});
+    res.render('debug', {headers:req.headers, session:req.session});
 });
 
 module.exports = router;

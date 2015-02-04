@@ -104,7 +104,9 @@ router.get('/authOk', function (req, res, next) {
             }
         }
         else {
-            req.session.quotientFamilial = JSON.parse(body);
+            var info = JSON.parse(body);
+            req.session.quotientFamilial = info.quotient;
+            req.session.pivotIdentityReturnedByFcToFd = info.pivotIdentity;
             res.redirect('/data/done');
         }
     });
