@@ -67,7 +67,11 @@
             padding: 0,
             prevEffect: 'none',
             type: 'iframe',
-            width: 500
+            width: 500,
+            afterShow: function(){
+                setTimeout($('.fancybox-iframe')[0].contentWindow.focus(), 100);
+                return false;
+            }
         });
     });
 </script>
