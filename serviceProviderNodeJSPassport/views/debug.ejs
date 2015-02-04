@@ -9,6 +9,12 @@
 <body>
 <div style="font-size:1.1em">
     <h1>Informations de debug</h1>
+    <h2>URL de callback appelée par FC</h2>
+    <% if (session.calledCallbackUrl) { %>
+        <p><%= session.calledCallbackUrl %></p>
+    <% } else { %>
+        <p>Non défini</p>
+    <% } %>
     <h2>UserInfo retourné par le FI via FC</h2>
     <% if (session && session.userInfo) {
         var fullUserInfo = session.userInfo;

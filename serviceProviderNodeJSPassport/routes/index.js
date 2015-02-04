@@ -23,6 +23,8 @@ router.get('/oidc_callback', function (req, res, next) {
 
         // Let's put the userInfo in session for the debug page
         req.session.userInfo = user._json;
+        // Let's also add the callback url that was actually called
+        req.session.calledCallbackUrl = req.url;
 
         req.logIn(user, function (err) {
             if (err) {
