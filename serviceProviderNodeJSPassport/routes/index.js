@@ -3,21 +3,9 @@ var passport = require('passport');
 var router = express.Router();
 var config = (new (require('../helpers/configManager.js'))())._rawConfig;
 var url = require('url');
+var indexController = new (require('../controllers/index.js').IndexController)();
 
-router.get('/', function (req, res) {
-    if (req.session.user) {
-        res.render('index', {title: 'Démonstrateur France Connect - Accueil', user: req.session.user});
-    } else {
-        if (req.session.passport.user !== undefined) {
-            var given_name = (req.session.passport.user._json.given_name) ? req.session.passport.user._json.given_name : '';
-            var family_name = (req.session.passport.user._json.family_name) ? req.session.passport.user._json.family_name : '';
-            req.session.user = given_name + ' ' + family_name;
-            res.render('index', {title: 'Démonstrateur France Connect - Accueil', user: req.session.user});
-        } else {
-            res.render('index', {title: 'Démonstrateur France Connect - Accueil', user: undefined});
-        }
-    }
-});
+router.get('/', indexController.handleMain);
 
 router.get('/login_org', passport.authenticate('openidconnect'), function (req, res) {
 });
