@@ -62,7 +62,8 @@ router.get('/logout', function (req, res) {
 });
 
 router.get('/blank', function (req, res) {
-    res.render('wait_screen');
+    var urlRedirect = req.query.urlRedirect || '/';
+    res.render('wait_screen', {urlRedirect :urlRedirect});
 });
 
 router.get('/get-user-displayable-data', function (req, res) {

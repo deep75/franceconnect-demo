@@ -107,12 +107,12 @@ router.get('/authOk', function (req, res, next) {
             var info = JSON.parse(body);
             req.session.quotientFamilial = info.quotient;
             req.session.pivotIdentityReturnedByFcToFd = info.pivotIdentity;
-            res.redirect('/data/done');
+            res.redirect('/blank?urlRedirect=/data/done');
         }
     });
 });
 router.get('/authKo', function (req, res, next) {
-    res.redirect('/');
+    res.redirect(302, '/blank');
 });
 
 router.get('/done', function (req, res, next) {
