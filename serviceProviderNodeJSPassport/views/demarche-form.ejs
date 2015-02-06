@@ -62,9 +62,27 @@
                     </div>
                 </div>
             </fieldset>
-            <input type="submit" value="Confirmer" class="btn btn-large"> <br/>
+            <input type="submit" value="Confirmer" class="btn btn-large hidden-phone" onclick="submitInIFrame()">
+            <input type="submit" value="Confirmer" class="btn btn-large hidden-desktop hidden-tablet">
+            <br/>
             <span style="text-size:8px">* Vous allez ensuite être redirigé vers une page qui va vous montrer les données auxquelles va accéder le service pour compléter votre demande. Nous aurons besoin de votre consentement.</span>
         </form>
     </div>
 </div>
+<script type="text/javascript">
+    function submitInIFrame () {
+        $("#crecheForm").attr('target','authFranceConnect');
+        $("#crecheForm").submit(function () {
+            $.fancybox.open({
+                content: '<iframe name="authFranceConnect" class="fancybox-iframe" border="0" style="width: 500px; height: 350px;"></iframe>',
+                closeEffect: 'none',
+                margin: [20, 60, 20, 60],
+                nextEffect: 'none',
+                openEffect: 'none',
+                padding: 0,
+                prevEffect: 'none'
+            });
+        });
+    }
+</script>
 <% include includes/footer %>
