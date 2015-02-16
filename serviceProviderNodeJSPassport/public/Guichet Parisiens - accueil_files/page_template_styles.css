@@ -113,6 +113,10 @@ ul.social li {
     padding-right: 0px;
 }
 
-.span3, .span1, .span2, .span8 {
+.span3, .span1, .span2, .span8, .span6 {
     padding: 10px;
+}
+
+.connect {
+    color: #ffffff;
 }
