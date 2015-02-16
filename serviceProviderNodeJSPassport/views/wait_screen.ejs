@@ -10,10 +10,11 @@
             return true;
         }
     }
+    var url = '<%= urlRedirect %>';
     if (inIframe()) {
-        parent.postMessage('message', '*');
+        parent.postMessage(url, '*');
     } else {
-        this.window.location.href = '/'
+        this.window.location.href = url
     }
 </script>
 </html>

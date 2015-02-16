@@ -23,6 +23,8 @@ router.get('/oidc_callback', function (req, res, next) {
 
         // Let's put the userInfo in session for the debug page
         req.session.userInfo = user._json;
+        // Let's also add the callback url that was actually called
+        req.session.calledCallbackUrl = req.url;
 
         req.logIn(user, function (err) {
             if (err) {
@@ -60,7 +62,8 @@ router.get('/logout', function (req, res) {
 });
 
 router.get('/blank', function (req, res) {
-    res.render('wait_screen');
+    var urlRedirect = req.query.urlRedirect || '/';
+    res.render('wait_screen', {urlRedirect :urlRedirect});
 });
 
 router.get('/get-user-displayable-data', function (req, res) {
