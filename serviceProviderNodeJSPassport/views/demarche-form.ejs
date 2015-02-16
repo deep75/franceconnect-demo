@@ -2,7 +2,7 @@
 <div class="row-fluid">
     <% include includes/voirie-panel.ejs %>
     <div class="span6 well">
-        <form method="POST" id="crecheForm" class="form-horizontal">
+        <form method="POST" id="crecheForm" class="form-horizontal" target="authFranceConnect">
             <fieldset>
 
                 <!-- Form Name -->
@@ -72,10 +72,9 @@
     function submitInIFrame () {
         var screenTabletWith = 767;
         if ($(window).width() > screenTabletWith) {
-            $("#crecheForm").attr('target','authFranceConnect');
             $("#crecheForm").submit(function () {
                 $.fancybox.open({
-                    content: '<iframe name="authFranceConnect" class="fancybox-iframe" border="0" style="width: 500px; height: 400px;"></iframe>',
+                    content: '<iframe name="' + this.target + '" class="fancybox-iframe" border="0" style="width: 500px; height: 400px;"></iframe>',
                     closeEffect: 'none',
                     margin: [20, 60, 20, 60],
                     nextEffect: 'none',
@@ -84,6 +83,8 @@
                     prevEffect: 'none'
                 });
             });
+        } else {
+            $("#crecheForm").unbind().attr('target', '');
         }
     }
 </script>
