@@ -57,8 +57,7 @@
                     type: 'iframe',
                     width: 500,
                     afterShow: function(){
-                        setTimeout($('.fancybox-iframe')[0].contentWindow.focus(), 100);
-                        return false;
+                        $('.fancybox-iframe')[0].contentWindow.postMessage('focus', '*');
                     }
                 });
             }
