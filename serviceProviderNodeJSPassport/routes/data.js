@@ -42,7 +42,8 @@ router.get('/form', function (req, res, next) {
         res.render('demarche-form.ejs', {
             title: 'Démonstrateur France Connect - Inscription à la cantine scolaire',
             user: req.session.user,
-            userInfo: req.session.passport.user
+            userInfo: req.session.passport.user,
+            authUrl: config.oauth.authorizationURL
         });
     } else {
         res.redirect('/');
