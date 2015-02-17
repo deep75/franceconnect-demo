@@ -2,7 +2,7 @@
 <div class="row-fluid">
     <% include includes/voirie-panel.ejs %>
     <div class="span6 well">
-        <form method="POST" id="crecheForm" class="form-horizontal">
+        <form method="POST" id="crecheForm" class="form-horizontal" target="authFranceConnect">
             <fieldset>
 
                 <!-- Form Name -->
@@ -62,8 +62,7 @@
                     </div>
                 </div>
             </fieldset>
-            <input type="submit" value="Confirmer" class="btn btn-large hidden-phone" onclick="submitInIFrame()">
-            <input type="submit" value="Confirmer" class="btn btn-large hidden-desktop hidden-tablet">
+            <input type="submit" value="Confirmer" class="btn btn-large" onclick="submitInIFrame()">
             <br/>
             <span style="text-size:8px">* Vous allez ensuite être redirigé vers une page qui va vous montrer les données auxquelles va accéder le service pour compléter votre demande. Nous aurons besoin de votre consentement.</span>
         </form>
@@ -71,18 +70,22 @@
 </div>
 <script type="text/javascript">
     function submitInIFrame () {
-        $("#crecheForm").attr('target','authFranceConnect');
-        $("#crecheForm").submit(function () {
-            $.fancybox.open({
-                content: '<iframe name="authFranceConnect" class="fancybox-iframe" border="0" style="width: 500px; height: 400px;"></iframe>',
-                closeEffect: 'none',
-                margin: [20, 60, 20, 60],
-                nextEffect: 'none',
-                openEffect: 'none',
-                padding: 0,
-                prevEffect: 'none'
+        var screenTabletWith = 767;
+        if ($(window).width() > screenTabletWith) {
+            $("#crecheForm").submit(function () {
+                $.fancybox.open({
+                    content: '<iframe name="' + this.target + '" class="fancybox-iframe" border="0" style="width: 500px; height: 400px;"></iframe>',
+                    closeEffect: 'none',
+                    margin: [20, 60, 20, 60],
+                    nextEffect: 'none',
+                    openEffect: 'none',
+                    padding: 0,
+                    prevEffect: 'none'
+                });
             });
-        });
+        } else {
+            $("#crecheForm").unbind().attr('target', '');
+        }
     }
 </script>
 <% include includes/footer %>
