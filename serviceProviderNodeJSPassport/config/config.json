@@ -7,6 +7,7 @@
     "authorizationURL": "http://fcp.dev.dev-franceconnect.fr/api/v1/authorize",
     "tokenURL": "http://fcp.dev.dev-franceconnect.fr/api/v1/token",
     "userInfoURL": "http://fcp.dev.dev-franceconnect.fr/api/v1/userinfo",
+    "logoutURL":"http://fcp.dev.dev-franceconnect.fr/api/v1/logout",
     "scope": ["profile"]
   },
   "oauth": {
