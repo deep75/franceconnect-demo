@@ -80,7 +80,12 @@
                     nextEffect: 'none',
                     openEffect: 'none',
                     padding: 0,
-                    prevEffect: 'none'
+                    prevEffect: 'none',
+                    afterShow: function () {
+                        $('.fancybox-iframe').load(function () {
+                            this.contentWindow.postMessage('focus', '*');
+                        });
+                    }
                 });
             });
         } else {
