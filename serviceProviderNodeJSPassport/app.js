@@ -14,6 +14,7 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var passport = require('passport');
 var OpenIdConnectStrategy = require('passport-openidconnect').Strategy;
+var passportAuthenticateWithAcrClaims = require('./helpers/passportAuthenticateWithAcrClaims').PassportAuthenticateWithAcrClaims;
 
 var indexRoutes = require('./routes/index');
 var dataRoutes = require('./routes/data');
@@ -43,6 +44,9 @@ var strat = function() {
             done(null, profile);
         })
     });
+
+    var alternateAuthenticate = new passportAuthenticateWithAcrClaims(config.openIdConnectStrategyParameters.userInfoURL, config.openIdConnectStrategyParameters.acr_values);
+    strategy.authenticate = alternateAuthenticate.authenticate;
     return strategy;
 };
 

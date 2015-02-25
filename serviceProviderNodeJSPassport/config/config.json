@@ -8,6 +8,7 @@
     "tokenURL": "http://fcp.dev.dev-franceconnect.fr/api/v1/token",
     "userInfoURL": "http://fcp.dev.dev-franceconnect.fr/api/v1/userinfo",
     "logoutURL":"http://fcp.dev.dev-franceconnect.fr/api/v1/logout",
+    "acr_values":"eidas2 eidas3",
     "scope": ["profile"]
   },
   "oauth": {
