@@ -74,13 +74,18 @@
         if ($(window).width() > screenTabletWith) {
             $("#crecheForm").submit(function () {
                 $.fancybox.open({
-                    content: '<iframe name="' + this.target + '" class="fancybox-iframe" border="0" style="width: 500px; height: 400px;"></iframe>',
+                    content: '<iframe name="' + this.target + '" class="fancybox-iframe" border="0" style="width: 500px; height: 400px;" src="<%= authUrl %>"></iframe>',
                     closeEffect: 'none',
                     margin: [20, 60, 20, 60],
                     nextEffect: 'none',
                     openEffect: 'none',
                     padding: 0,
-                    prevEffect: 'none'
+                    prevEffect: 'none',
+                    afterShow: function () {
+                        $('.fancybox-iframe').load(function () {
+                            this.contentWindow.postMessage('focus', '*');
+                        });
+                    }
                 });
             });
         } else {

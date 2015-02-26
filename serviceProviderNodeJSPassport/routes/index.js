@@ -56,9 +56,7 @@ router.get('/get-data', function (req, res) {
 
 router.get('/logout', function (req, res) {
     req.session.destroy();
-    var parsedUrl = url.parse(config.oauth.authorizationURL);
-    var logoutUrl = parsedUrl.protocol + '//' + parsedUrl.host + '/api/v1/logout';
-    res.redirect(logoutUrl);
+    res.redirect(config.openIdConnectStrategyParameters.logoutURL);
 });
 
 router.get('/blank', function (req, res) {
