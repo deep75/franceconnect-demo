@@ -46,6 +46,9 @@ PassportAuthenticateWithAcrClaims.prototype.authenticate = function(req, options
                 return self.fail({redirect_uri: req.session.demandeEnCoursQuery.redirect_uri});
             }
 
+            //store idToken in session for testing purpose
+            req.session.idToken = idToken;
+
             var idTokenSegments = idToken.split('.')
                 , jwtClaimsStr
                 , jwtClaims;

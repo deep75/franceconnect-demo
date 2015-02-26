@@ -40,6 +40,12 @@
     <% } else { %>
         <p>Session vide</p>
     <% } %>
+    <h2>IdToken stocké en session</h2>
+    <% if (idToken) { %>
+        <p>idToken : <%= idToken %></p>
+    <% } else { %>
+        <p>Aucun idToken en session</p>
+    <% } %>
 </div>
 </body>
 

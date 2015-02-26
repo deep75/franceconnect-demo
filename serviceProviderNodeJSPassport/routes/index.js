@@ -61,15 +61,20 @@ router.get('/logout', function (req, res) {
 
 router.get('/blank', function (req, res) {
     var urlRedirect = req.query.urlRedirect || '/';
-    res.render('wait_screen', {urlRedirect :urlRedirect});
+    res.render('wait_screen', {urlRedirect: urlRedirect});
 });
 
 router.get('/get-user-displayable-data', function (req, res) {
     res.json({user: req.session.user});
 });
 
-router.get('/debug', function(req, res) {
-    res.render('debug', {headers:req.headers, session:req.session});
+router.get('/debug', function (req, res) {
+    var idToken = null;
+    if (req.session.idToken) {
+        var idTokenSegments = req.session.idToken.split('.');
+        idToken = new Buffer(idTokenSegments[1], 'base64').toString();
+    }
+    res.render('debug', {headers: req.headers, session: req.session, idToken: idToken});
 });
 
 module.exports = router;
