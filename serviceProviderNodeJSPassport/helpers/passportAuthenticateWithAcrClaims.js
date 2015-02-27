@@ -75,11 +75,9 @@ PassportAuthenticateWithAcrClaims.prototype.authenticate = function(req, options
                     var parsed = url.parse(self._userInfoURL, true);
                     parsed.query['schema'] = 'openid';
                     delete parsed.search;
-                    var userInfoURL = url.format(parsed);
-
-                    userInfoURL = _userInfoURLBase+'?access_token='+accessToken+'&schema=openid';
+                    var userInfoURL = _userInfoURLBase+'?access_token='+accessToken+'&schema=openid';
                     oauth2._request("GET", userInfoURL, { 'Accept': "application/json"
-                    }, null, null, function (err, body, res) {
+                    }, null, null, function (err, body) {
                         if (err) {
                             console.error('error when accessing userInfo with FI '+req.headers.referer+' : '+err);
                             return self.fail({redirect_uri: req.session.demandeEnCoursQuery.redirect_uri});
@@ -177,6 +175,8 @@ PassportAuthenticateWithAcrClaims.prototype.authenticate = function(req, options
         } else {
             params.scope = 'openid';
         }
+        // ajout demande des champs facultatifs
+        params.scope = params.scope + this._scopeSeparator + 'email' + this._scopeSeparator + 'address' + this._scopeSeparator + 'phone' + this._scopeSeparator + 'preferred_username';
         // TODO: Add support for automatically generating a random state for verification.
         var state = options.state;
         if (state) {
