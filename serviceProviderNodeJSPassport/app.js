@@ -14,7 +14,7 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var passport = require('passport');
 var OpenIdConnectStrategy = require('passport-openidconnect').Strategy;
-var passportAuthenticateWithAcrClaims = require('./helpers/passportAuthenticateWithAcrClaims').PassportAuthenticateWithAcrClaims;
+var passportAuthenticateWithAcrClaims = require('./helpers/passportAuthenticateWithCustomClaims').PassportAuthenticateWithCustomClaims;
 
 var indexRoutes = require('./routes/index');
 var dataRoutes = require('./routes/data');
@@ -39,7 +39,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 var strat = function() {
-    var strategy = new OpenIdConnectStrategy(config.openIdConnectStrategyParameters, function (accessToken, refreshToken, profile, req, res, done) {
+    var strategy = new OpenIdConnectStrategy(config.openIdConnectStrategyParameters, function (iss, sub, profile, accesstoke, refreshtoken, done) {
         process.nextTick(function () {
             done(null, profile);
         })

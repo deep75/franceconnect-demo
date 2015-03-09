@@ -7,12 +7,12 @@ var _userInfoURLBase = '';
 
 var _acr_values = null;
 
-var PassportAuthenticateWithAcrClaims = function(userInfoUrl, acrValues){
+var PassportAuthenticateWithCustomClaims = function(userInfoUrl, acrValues){
     _userInfoURLBase = userInfoUrl;
     _acr_values = acrValues;
 };
 
-PassportAuthenticateWithAcrClaims.prototype.authenticate = function(req, options) {
+PassportAuthenticateWithCustomClaims.prototype.authenticate = function(req, options) {
     options = options || {};
     var self = this;
     if (req.query && req.query.error) {
@@ -170,13 +170,9 @@ PassportAuthenticateWithAcrClaims.prototype.authenticate = function(req, options
         if (Array.isArray(scope)) {
             scope = scope.join(this._scopeSeparator);
         }
-        if (scope) {
-            params.scope = 'openid' + this._scopeSeparator + scope;
-        } else {
-            params.scope = 'openid';
-        }
+
         // ajout demande des champs facultatifs
-        params.scope = params.scope + this._scopeSeparator + 'email' + this._scopeSeparator + 'address' + this._scopeSeparator + 'phone' + this._scopeSeparator + 'preferred_username';
+        //params.scope = params.scope + this._scopeSeparator + 'email' + this._scopeSeparator + 'address' + this._scopeSeparator + 'phone' + this._scopeSeparator + 'preferred_username';
         // TODO: Add support for automatically generating a random state for verification.
         var state = options.state;
         if (state) {
@@ -186,9 +182,15 @@ PassportAuthenticateWithAcrClaims.prototype.authenticate = function(req, options
 
         params.acr_values = _acr_values;
 
+        if(options.consents){
+            params.consents = options.consents;
+        }
+
+        params.scope = scope;
+
         var location = this._authorizationURL + '?' + querystring.stringify(params);
         this.redirect(location);
     }
 };
 
-module.exports.PassportAuthenticateWithAcrClaims = PassportAuthenticateWithAcrClaims;
+module.exports.PassportAuthenticateWithCustomClaims = PassportAuthenticateWithCustomClaims;

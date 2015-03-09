@@ -3,23 +3,36 @@ var passport = require('passport');
 var router = express.Router();
 var request = require('request');
 var config = (new (require('../helpers/configManager.js'))())._rawConfig;
-var Oauth2Strategy = require('passport-oauth').OAuth2Strategy;
+var Oauth2Strategy = require('passport-openidconnect').Strategy;
+var passportAuthenticateWithCUstomClaims = require('../helpers/passportAuthenticateWithCustomClaims').PassportAuthenticateWithCustomClaims;
+
 var _ = require('lodash');
 
-passport.use('provider', new Oauth2Strategy({
-        authorizationURL: config.oauth.authorizationURL,
-        tokenURL: config.oauth.tokenURL,
-        clientID: config.openIdConnectStrategyParameters.clientID,
-        clientSecret: config.openIdConnectStrategyParameters.clientSecret,
-        callbackURL: config.oauth.callbackURL,
-        scope: config.oauth.scopes
-    },
-    function (accessToken, refreshToken, profile, done) {
-        profile.accessToken = accessToken;
-        profile.refreshToken = refreshToken;
-        console.log(profile);
-        done(null, profile);
-    }));
+var parameters = {
+    authorizationURL: config.oauth.authorizationURL,
+    tokenURL: config.oauth.tokenURL,
+    clientID: config.openIdConnectStrategyParameters.clientID,
+    clientSecret: config.openIdConnectStrategyParameters.clientSecret,
+    callbackURL: config.oauth.callbackURL,
+    scope: config.oauth.scopes
+};
+
+var strat = function() {
+    var strategy = new Oauth2Strategy(
+        parameters,
+        function (iss, sub, profile, accessToken, refreshToken, done) {
+            profile = {};
+            profile.accessToken = accessToken;
+            profile.refreshToken = refreshToken;
+            done(null, profile);
+        });
+
+    var alternateAuthenticate = new passportAuthenticateWithCUstomClaims('', config.openIdConnectStrategyParameters.acr_values, 1);
+    strategy.authenticate = alternateAuthenticate.authenticate;
+    return strategy;
+};
+
+passport.use('provider', strat());
 
 passport.serializeUser(function (user, done) {
     done(null, user);
@@ -29,10 +42,9 @@ passport.deserializeUser(function (obj, done) {
     done(null, obj);
 });
 
-//1st step
 router.get('/', function (req, res, next) {
     next();
-}, passport.authenticate('provider'), function (req, res, next) {
+}, passport.authenticate('provider', {consents:1}), function (req, res, next) {
     console.log('got through the oauth2 authentication process.');
 });
 
@@ -56,7 +68,6 @@ router.post('/form', function (req, res) {
     res.redirect('/data/');
 });
 
-//2nd step
 router.get('/callback', passport.authenticate('provider', {
     successRedirect: '/data/authOk',
     failureRedirect: '/data/authKo',
@@ -116,8 +127,16 @@ router.get('/authKo', function (req, res, next) {
     res.redirect(302, '/blank');
 });
 
+function userDoesNotHaveSessionDataYet(req) {
+    return _.isUndefined(req.session) ||
+        _.isUndefined(req.session.user) ||
+        _.isUndefined(req.session.passport) ||
+        _.isUndefined(req.session.passport.user) ||
+        _.isUndefined(req.session.quotientFamilial) ||
+        _.isUndefined(req.session.cantineParams);
+}
 router.get('/done', function (req, res, next) {
-    if (_.isUndefined(req.session) || _.isUndefined(req.session.user) || _.isUndefined(req.session.passport) || _.isUndefined(req.session.passport.user) || _.isUndefined(req.session.quotientFamilial) || _.isUndefined(req.session.cantineParams)) {
+    if (userDoesNotHaveSessionDataYet(req)) {
         res.redirect('/');
     } else {
         res.render('demarche-etape2.ejs', {
