@@ -36,9 +36,10 @@ PassportAuthenticateWithCustomClaims.prototype.authenticate = function(req, opti
 
         oauth2.getOAuthAccessToken(code, { grant_type: 'authorization_code', redirect_uri: callbackURL }, function(err, accessToken, refreshToken, params) {
             if (err) {
+                var redirectUri = req.session.demandeEnCoursQuery ? req.session.demandeEnCoursQuery.redirect_uri : '/';
                 console.error('error when getting access token with FC ' + self._tokenURL);
                 console.error(err.stack)
-                return self.fail({redirect_uri: req.session.demandeEnCoursQuery.redirect_uri || '/'});
+                return self.fail({redirect_uri: redirectUri});
             }
             var idToken = params['id_token'];
             if (!idToken) {
