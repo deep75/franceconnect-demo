@@ -14,7 +14,8 @@ var parameters = {
     clientID: config.openIdConnectStrategyParameters.clientID,
     clientSecret: config.openIdConnectStrategyParameters.clientSecret,
     callbackURL: config.oauth.callbackURL,
-    scope: config.oauth.scopes
+    scope: config.oauth.scopes,
+    skipUserProfile:true
 };
 
 var strat = function() {
