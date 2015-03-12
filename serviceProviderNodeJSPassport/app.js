@@ -45,7 +45,7 @@ var strat = function() {
         })
     });
 
-    var alternateAuthenticate = new passportAuthenticateWithAcrClaims(config.openIdConnectStrategyParameters.userInfoURL, config.openIdConnectStrategyParameters.acr_values);
+    var alternateAuthenticate = new passportAuthenticateWithAcrClaims(config.openIdConnectStrategyParameters.userInfoURL, config.openIdConnectStrategyParameters.acr, config.openIdConnectStrategyParameters.clientSecret);
     strategy.authenticate = alternateAuthenticate.authenticate;
     return strategy;
 };

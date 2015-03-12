@@ -1,10 +1,11 @@
 var url = require('url');
-var querystring = require('querystring');
 var _ = require('lodash');
 var OAuth2 = require('oauth').OAuth2;
+var customStrategyHelper = new (require('./customStrategyHelper.js').CustomStrategyHelper)();
+
+var jwt = require('jwt-simple');
 
 var _userInfoURLBase = '';
-
 var _acr_values = null;
 
 var PassportAuthenticateWithCustomClaims = function(userInfoUrl, acrValues){
@@ -161,36 +162,61 @@ PassportAuthenticateWithCustomClaims.prototype.authenticate = function(req, opti
             });
         });
     } else {
-        //var params = this.authorizationParams(options);
-        var params = {};
-        params['response_type'] = 'code';
-        params['client_id'] = this._clientID;
-        params['redirect_uri'] = callbackURL;
-        var scope = options.scope || this._scope;
-        if (Array.isArray(scope)) {
-            scope = scope.join(this._scopeSeparator);
-        }
+        ////var params = this.authorizationParams(options);
+        //var params = {};
+        //params['response_type'] = 'code';
+        //params['client_id'] = this._clientID;
+        //params['redirect_uri'] = callbackURL;
+        //var scope = options.scope || this._scope;
+        //if (Array.isArray(scope)) {
+        //    scope = scope.join(this._scopeSeparator);
+        //}
+        //
+        //// ajout demande des champs facultatifs
+        ////params.scope = params.scope + this._scopeSeparator + 'email' + this._scopeSeparator + 'address' + this._scopeSeparator + 'phone' + this._scopeSeparator + 'preferred_username';
+        //// TODO: Add support for automatically generating a random state for verification.
+        //var state = options.state;
+        //if (state) {
+        //    params.state = state;
+        //}
+        //// TODO: Implement support for standard OpenID Connect params (display, prompt, etc.)
+        //
+        //params.acr_values = _acr_values;
+        //
+        //if (options.consents) {
+        //    params.consents = options.consents;
+        //}
+        //
+        //params.scope = scope;
+        //
+        ////quelque part par là, mettre en place la request avec les paramètres requis
+        //// ===> veut dire que si FC n'est pas capable de répondre à certaines demandes il devra probablement péter une erreur
+        //// ===> FC devra décoder le JWT transmis
+        //
+        ////params.request = jwt.encode(request);`
+        //
+        //
+        //var location = this._authorizationURL + '?' + querystring.stringify(params);
+        //this.redirect(location);
 
-        // ajout demande des champs facultatifs
-        //params.scope = params.scope + this._scopeSeparator + 'email' + this._scopeSeparator + 'address' + this._scopeSeparator + 'phone' + this._scopeSeparator + 'preferred_username';
-        // TODO: Add support for automatically generating a random state for verification.
-        var state = options.state;
-        if (state) {
-            params.state = state;
-        }
-        // TODO: Implement support for standard OpenID Connect params (display, prompt, etc.)
+        options.scope = options.scope || this._scope;
+        options.authorizationURL = this._authorizationURL;
+        options.clientID = this._clientID;
+        options.acr = _acr_values;
+        options.secret = this._clientSecret;
 
-        params.acr_values = _acr_values;
-
-        if(options.consents){
-            params.consents = options.consents;
-        }
-
-        params.scope = scope;
-
-        var location = this._authorizationURL + '?' + querystring.stringify(params);
-        this.redirect(location);
+        this.redirect(customStrategyHelper.prepareAuthorizationRequest(callbackURL, options));
     }
+};
+
+PassportAuthenticateWithCustomClaims.prototype.generateRequestParameter = function(mandatoryAcrClaims, secret){
+    //var token = {"claims"};
+    var payload = {
+        "claims":{
+            "id_token":{"acr":{"essential":true, values:mandatoryAcrClaims}}
+        }
+    };
+    return jwt.encode(payload, secret);
 };
 
 module.exports.PassportAuthenticateWithCustomClaims = PassportAuthenticateWithCustomClaims;
