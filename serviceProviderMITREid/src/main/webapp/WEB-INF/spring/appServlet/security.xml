@@ -93,9 +93,9 @@
                     <bean class="org.mitre.openid.connect.config.ServerConfiguration">
                         <property name="issuer" value="http://fcp.dev.dev-franceconnect.fr"/>
                         <property name="authorizationEndpointUri"
-                                  value="http://fcp.dev.dev-franceconnect.fr/user/authorize"/>
-                        <property name="tokenEndpointUri" value="http://fcp.dev.dev-franceconnect.fr/user/token"/>
-                        <property name="userInfoUri" value="http://fcp.dev.dev-franceconnect.fr/api/user"/>
+                                  value="http://fcp.dev.dev-franceconnect.fr/api/v1/authorize"/>
+                        <property name="tokenEndpointUri" value="http://fcp.dev.dev-franceconnect.fr/api/v1/token"/>
+                        <property name="userInfoUri" value="http://fcp.dev.dev-franceconnect.fr/api/v1/userinfo"/>
                         <property name="userInfoTokenMethod" value="QUERY"/>
                     </bean>
                 </entry>
