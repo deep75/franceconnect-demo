@@ -46,8 +46,12 @@
     <% } else { %>
         <p>Aucun idToken en session</p>
     <% } %>
+    <h2>Sub fourni par FC</h2>
+    <% if (sub) { %>
+    <p>sub : <span id="subFourniParFC"><%= sub %></span></p>
+    <% } else { %>
+    <p>Aucun idToken en session</p>
+    <% } %>
 </div>
-</body>
-
 </body>
 </html>

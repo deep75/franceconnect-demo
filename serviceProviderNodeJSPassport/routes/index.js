@@ -11,7 +11,7 @@ router.get('/login_org', passport.authenticate('openidconnect'), function (req, 
 });
 
 router.get('/oidc_callback', function (req, res, next) {
-    passport.authenticate('openidconnect', function (err, user, info) {
+    passport.authenticate('openidconnect', function (err, user) {
         if (err) {
             return next(err);
         }
@@ -70,11 +70,13 @@ router.get('/get-user-displayable-data', function (req, res) {
 
 router.get('/debug', function (req, res) {
     var idToken = null;
+    var sub = null;
     if (req.session.idToken) {
         var idTokenSegments = req.session.idToken.split('.');
         idToken = new Buffer(idTokenSegments[1], 'base64').toString();
+        sub = JSON.parse(new Buffer(idTokenSegments[1], 'base64').toString()).sub;
     }
-    res.render('debug', {headers: req.headers, session: req.session, idToken: idToken});
+    res.render('debug', {headers: req.headers, session: req.session, idToken: idToken, sub: sub});
 });
 
 module.exports = router;
