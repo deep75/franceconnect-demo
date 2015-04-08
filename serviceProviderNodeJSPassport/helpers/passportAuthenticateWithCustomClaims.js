@@ -17,7 +17,7 @@ PassportAuthenticateWithCustomClaims.prototype.authenticate = function(req, opti
     var self = this;
     if (req.query && req.query.error) {
         console.error('error when initiating authentication with FI : '+ (req.query.error ? req.query.error : ''));
-        return this.fail({redirect_uri: req.session.demandeEnCoursQuery.redirect_uri});
+        return this.fail({redirect_uri: options.failureRedirect});
     }
 
     var callbackURL = options.callbackURL || this._callbackURL;
@@ -36,15 +36,14 @@ PassportAuthenticateWithCustomClaims.prototype.authenticate = function(req, opti
 
         oauth2.getOAuthAccessToken(code, { grant_type: 'authorization_code', redirect_uri: callbackURL }, function(err, accessToken, refreshToken, params) {
             if (err) {
-                var redirectUri = req.session.demandeEnCoursQuery ? req.session.demandeEnCoursQuery.redirect_uri : '/';
                 console.error('error when getting access token with FC ' + self._tokenURL);
-                console.error(err.stack)
-                return self.fail({redirect_uri: redirectUri});
+                console.error(err.stack);
+                return self.fail({redirect_uri: options.failureRedirect});
             }
             var idToken = params['id_token'];
             if (!idToken) {
                 console.error('ID Token not present in token response from FI ' + req.headers.referer);
-                return self.fail({redirect_uri: req.session.demandeEnCoursQuery.redirect_uri});
+                return self.fail({redirect_uri: options.failureRedirect});
             }
 
             //store idToken in session for testing purpose
@@ -60,7 +59,7 @@ PassportAuthenticateWithCustomClaims.prototype.authenticate = function(req, opti
                 jwtClaims = JSON.parse(jwtClaimsStr);
             } catch (ex) {
                 console.error('error parsing jwt from FI '+req.headers.referer + ': ' + ex);
-                return self.fail({redirect_uri: req.session.demandeEnCoursQuery.redirect_uri});
+                return self.fail({redirect_uri: options.failureRedirect});
             }
 
             var iss = jwtClaims.iss;
@@ -69,7 +68,7 @@ PassportAuthenticateWithCustomClaims.prototype.authenticate = function(req, opti
             self._shouldLoadUserProfile(iss, sub, function(err, load) {
                 if (err) {
                     console.error('error loading user profile : '+err);
-                    return self.fail({redirect_uri: req.session.demandeEnCoursQuery.redirect_uri});
+                    return self.fail({redirect_uri: options.failureRedirect});
                 }
 
                 if (load) {
@@ -81,7 +80,7 @@ PassportAuthenticateWithCustomClaims.prototype.authenticate = function(req, opti
                     }, null, null, function (err, body) {
                         if (err) {
                             console.error('error when accessing userInfo with FI '+req.headers.referer+' : '+err);
-                            return self.fail({redirect_uri: req.session.demandeEnCoursQuery.redirect_uri});
+                            return self.fail({redirect_uri: options.failureRedirect});
                         }
 
                         var json;
@@ -109,7 +108,7 @@ PassportAuthenticateWithCustomClaims.prototype.authenticate = function(req, opti
                         }
                         catch (e) {
                             console.error('error parsing id token from FI '+req.headers.referer+': '+e);
-                            return self.fail({redirect_uri: req.session.demandeEnCoursQuery.redirect_uri});
+                            return self.fail({redirect_uri: options.failureRedirect});
                         }
 
                         //TODO : tests, gros changements par rapport à la strat custom FC
@@ -123,7 +122,7 @@ PassportAuthenticateWithCustomClaims.prototype.authenticate = function(req, opti
                     function verified(err, user, info) {
                         if (err) {
                             console.error('error in method verified: ' + err);
-                            return self.fail({redirect_uri: req.session.demandeEnCoursQuery.redirect_uri});
+                            return self.fail({redirect_uri: options.failureRedirect});
                         }
                         if (!user) {
                             return self.fail(info);
