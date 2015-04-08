@@ -75,8 +75,10 @@ PassportAuthenticateWithCustomClaims.prototype.authenticate = function(req, opti
                     var parsed = url.parse(self._userInfoURL, true);
                     parsed.query['schema'] = 'openid';
                     delete parsed.search;
-                    var userInfoURL = _userInfoURLBase+'?access_token='+accessToken+'&schema=openid';
-                    oauth2._request("GET", userInfoURL, { 'Accept': "application/json"
+                    var userInfoURL = _userInfoURLBase+'?schema=openid';
+                    oauth2._request("GET", userInfoURL, {
+                        'Accept': "application/json",
+                        'Authorization': 'Bearer '+accessToken
                     }, null, null, function (err, body) {
                         if (err) {
                             console.error('error when accessing userInfo with FI '+req.headers.referer+' : '+err);
