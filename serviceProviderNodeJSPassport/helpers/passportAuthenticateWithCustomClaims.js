@@ -2,7 +2,7 @@ var url = require('url');
 var querystring = require('querystring');
 var _ = require('lodash');
 var OAuth2 = require('oauth').OAuth2;
-
+var crypto = require('crypto');
 var _userInfoURLBase = '';
 
 var _acr_values = null;
@@ -175,13 +175,10 @@ PassportAuthenticateWithCustomClaims.prototype.authenticate = function(req, opti
 
         // ajout demande des champs facultatifs
         //params.scope = params.scope + this._scopeSeparator + 'email' + this._scopeSeparator + 'address' + this._scopeSeparator + 'phone' + this._scopeSeparator + 'preferred_username';
-        // TODO: Add support for automatically generating a random state for verification.
-        var state = options.state;
-        if (state) {
-            params.state = state;
-        }
-        // TODO: Implement support for standard OpenID Connect params (display, prompt, etc.)
+        req.session.state = options.state || crypto.randomBytes(25).toString('hex');
+        params.state = req.session.state;
 
+        // TODO: Implement support for standard OpenID Connect params (display, prompt, etc.)
         params.acr_values = _acr_values;
 
         if(options.consents){

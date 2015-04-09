@@ -3,14 +3,23 @@ var passport = require('passport');
 var router = express.Router();
 var config = (new (require('../helpers/configManager.js'))())._rawConfig;
 var url = require('url');
+var crypto = require('crypto');
 var indexController = new (require('../controllers/index.js').IndexController)();
+
+function checkStateParams(req, res, next) {
+    if (req.session.state !== req.query.state) {
+        return res.status(401).send({error: {'name': 'invalid_state', 'message': 'invalid state'}});
+    } else {
+        next();
+    }
+}
 
 router.get('/', indexController.handleMain);
 
 router.get('/login_org', passport.authenticate('openidconnect'), function (req, res) {
 });
 
-router.get('/oidc_callback', function (req, res, next) {
+router.get('/oidc_callback', checkStateParams, function (req, res, next) {
     passport.authenticate('openidconnect', function (err, user) {
         if (err) {
             return next(err);
