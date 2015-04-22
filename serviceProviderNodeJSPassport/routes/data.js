@@ -77,6 +77,14 @@ router.get('/callback', passport.authenticate('provider', {
     console.log('got to the callback URL, at this point we should ve obtained an access token');
 });
 
+router.get('/callbackbretons', passport.authenticate('provider', {
+    successRedirect: '/data/okBretons',
+    failureRedirect: '/data/authKo',
+    scope: config.oauth.scopes
+}), function (req, res, next) {
+    console.log('got to the callback URL, at this point we should ve obtained an access token');
+});
+
 router.get('/authOk', function (req, res, next) {
     var options = {
         url: config.quotientFamilialURL,
@@ -124,6 +132,60 @@ router.get('/authOk', function (req, res, next) {
         }
     });
 });
+
+router.get('/okBretons', function (req, res, next) {
+    var options = {
+        url: config.quotientFamilialURL,
+        headers: {
+            'Authorization': 'Bearer ' + req.session.passport.user.accessToken
+        }
+    };
+    request.get(options, function (err, response, body) {
+        if (err) {
+            console.error('Error while reaching FD');
+            console.error(err);
+            next(err);
+        } else if (!body) {
+            console.log('No body ... ');
+            next(new Error('No Body'));
+        }
+        else if (response.statusCode != 200) {
+            if (response.headers['www-authenticate']) {
+                var error = new Error();
+                var errorElements = response.headers['www-authenticate'].trim().match('Bearer: error="(.*?)",error_description="(.*?)"');
+                if (errorElements.length == 3) {
+                    error.name = errorElements[1];
+                    error.message = errorElements[2];
+                }
+                else {
+                    error.message = "Wrongly formatted authentication header";
+                }
+                console.error(error);
+                next(error);
+            } else {
+                var error = new Error();
+                error.name = 'errorTriggeredButNoDescriptionProvided';
+                error.message = 'An error occurred but no error description was provided to the client';
+                console.error(error);
+                console.error(response.statusCode);
+                console.error(response.body);
+                next(error);
+            }
+        }
+        else {
+            var records = JSON.parse(body).records;
+            if(records.length) {
+                var info =records[0].fields;
+                delete info.login;
+                req.session.quotientFamilial = info.rfr;
+                req.session.pivotIdentityReturnedByFcToFd = info;
+                delete req.session.pivotIdentityReturnedByFcToFd.rfr;
+            }
+            res.redirect('/blank?urlRedirect=/data/done');
+        }
+    });
+});
+
 router.get('/authKo', function (req, res, next) {
     res.redirect(302, '/blank');
 });
