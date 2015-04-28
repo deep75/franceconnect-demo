@@ -62,6 +62,12 @@ PassportAuthenticateWithCustomClaims.prototype.authenticate = function(req, opti
                 return self.fail({redirect_uri: options.failureRedirect});
             }
 
+            var expectedIssuerHostname = url.parse(self._tokenURL).hostname;
+            if ((jwtClaims === undefined || jwtClaims.iss === undefined) || expectedIssuerHostname !== url.parse(jwtClaims.iss).hostname) {
+                console.error('idToken provided does not contain the valid issuer host name : should be ' + expectedIssuerHostname + ' instead of ' + jwtClaims.iss);
+                return self.fail({redirect_uri: options.failureRedirect});
+            }
+
             var iss = jwtClaims.iss;
             var sub = jwtClaims.sub;
 
