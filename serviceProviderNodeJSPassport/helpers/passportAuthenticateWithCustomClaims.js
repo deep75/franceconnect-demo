@@ -68,6 +68,11 @@ PassportAuthenticateWithCustomClaims.prototype.authenticate = function(req, opti
                 return self.fail({redirect_uri: options.failureRedirect});
             }
 
+            if (jwtClaims.nonce && (jwtClaims.nonce !== req.session.nonce)) {
+                console.error('idToken provided does not contain the valid nonce value');
+                return self.fail({redirect_uri: options.failureRedirect});
+            }
+
             var iss = jwtClaims.iss;
             var sub = jwtClaims.sub;
 
@@ -181,8 +186,8 @@ PassportAuthenticateWithCustomClaims.prototype.authenticate = function(req, opti
 
         // ajout demande des champs facultatifs
         //params.scope = params.scope + this._scopeSeparator + 'email' + this._scopeSeparator + 'address' + this._scopeSeparator + 'phone' + this._scopeSeparator + 'preferred_username';
-        req.session.state = options.state || crypto.randomBytes(25).toString('hex');
-        params.state = req.session.state;
+        params.state = req.session.state = options.state || crypto.randomBytes(25).toString('hex');
+        params.nonce = req.session.nonce = options.nonce || crypto.randomBytes(25).toString('hex');
 
         // TODO: Implement support for standard OpenID Connect params (display, prompt, etc.)
         params.acr_values = _acr_values;
