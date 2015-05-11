@@ -96,7 +96,7 @@
                                   value="http://fcp.dev.dev-franceconnect.fr/api/v1/authorize"/>
                         <property name="tokenEndpointUri" value="http://fcp.dev.dev-franceconnect.fr/api/v1/token"/>
                         <property name="userInfoUri" value="http://fcp.dev.dev-franceconnect.fr/api/v1/userinfo"/>
-                        <property name="userInfoTokenMethod" value="QUERY"/>
+                        <property name="userInfoTokenMethod" value="HEADER"/>
                     </bean>
                 </entry>
             </map>
