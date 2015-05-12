@@ -73,10 +73,7 @@
         var screenTabletWith = 767;
         if ($(window).width() > screenTabletWith) {
             $("#crecheForm").submit(function () {
-                event.preventDefault();
-                $.post('/data/form-ajax-update', $("#crecheForm").serialize(), function () {
-                    OpenPopupCenter('/data', "FranceConnect_Identification", 500, 600);
-                });
+                OpenPopupCenter(this.action, 'authFranceConnect', 500, 600);
             });
         } else {
             $("#crecheForm").unbind().attr('target', '');
