@@ -25,18 +25,12 @@
           media="screen, projection">
     <script src="/Guichet%20Parisiens%20-%20accueil_files/jquery.min.js"></script>
 
-    <!-- modale France Connect -->
-    <link rel="stylesheet" href="/stylesheets/jquery.fancybox.css" type="text/css" media="screen"/>
-    <link rel="stylesheet" href="/stylesheets/jquery.fancybox-buttons.css" type="text/css" media="screen"/>
-
-    <style>
-        .fancybox-next {
-            display: none;
+    <script type="text/javascript">
+        function OpenPopupCenter(pageURL, id, width, height) {
+            var left = (screen.width - width) / 2;
+            var top = (screen.height - height) / 4;
+            window.open(pageURL, id, 'toolbar=no, menubar=no, scrollbars=yes,location=yes,resizable=yes, width=' + width + ', height=' + height + ', top=' + top + ', left=' + left);
         }
-
-        .fancybox-prev {
-            display: none;
-        }
-    </style>
+    </script>
 </head>
 <body>

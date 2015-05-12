@@ -15,7 +15,7 @@
             <div class="span6 connect">
                 <span>Identifiez-vous avec FranceConnect :</span>
                 <br/>
-                <a id="fc_login" class="btn btn-large" rel="group" href="/login_org" modal="true" autoHeight="false" autoSize="false">
+                <a id="fc_login" class="btn btn-large" rel="group" href="/login_org">
                     <img src="/images/logoFC.png" alt="connexion avec FranceConnect"/>
                 </a>
             </div>
@@ -23,44 +23,12 @@
         </div>
     </div>
 
-<div id="fc_login_popin" style="display: none">
-</div>
-
-<!-- listener on login success postMessage from popin -->
 <script type="text/javascript">
-    addEventListener("message", receiveMessage, false);
-    function receiveMessage(event) {
-        $("#fc_login_popin").hide();
-        window.location.href = event.data;
-    }
-</script>
-
-<!-- Add fancyBox -->
-<script type="text/javascript" src="/javascripts/jquery.fancybox.pack.js"></script>
-
-<script type="text/javascript">
-    $(document).ready(function () {
-        var screenTabletWith = 767;
-        $('#fc_login').click(function(event) {
-            if ($(window).width() > screenTabletWith) {
-                event.preventDefault();
-                $.fancybox({
-                    href: $(this).attr('href'),
-                    closeBtn: '<a title="Close" class="fancybox-item fancybox-close" href="javascript:;"></a>',
-                    closeEffect: 'none',
-                    height: 600,
-                    margin: [20, 60, 20, 60],
-                    nextEffect: 'none',
-                    openEffect: 'none',
-                    padding: 0,
-                    prevEffect: 'none',
-                    type: 'iframe',
-                    width: 500,
-                    afterShow: function(){
-                        $('.fancybox-iframe')[0].contentWindow.postMessage('focus', '*');
-                    }
-                });
-            }
-        });
+    var screenTabletWith = 767;
+    $('#fc_login').click(function(event) {
+        if ($(window).width() > screenTabletWith) {
+            event.preventDefault();
+            OpenPopupCenter(this.href, "FranceConnect_Identification", 500, 600);
+        }
     });
 </script>

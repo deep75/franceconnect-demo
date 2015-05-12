@@ -3,16 +3,10 @@
 <p>Redirection vers la page d'accueil...</p>
 </body>
 <script type="text/javascript">
-    function inIframe() {
-        try {
-            return window.self !== window.top;
-        } catch (e) {
-            return true;
-        }
-    }
     var url = '<%= urlRedirect %>';
-    if (inIframe()) {
-        parent.postMessage(url, '*');
+    if (this.window.opener && !this.window.opener.closed) {
+        this.window.opener.location.href = url;
+        this.window.close();
     } else {
         this.window.location.href = url
     }

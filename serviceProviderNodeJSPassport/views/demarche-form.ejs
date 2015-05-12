@@ -73,20 +73,9 @@
         var screenTabletWith = 767;
         if ($(window).width() > screenTabletWith) {
             $("#crecheForm").submit(function () {
-                $.fancybox.open({
-                    content: '<iframe name="' + this.target + '" class="fancybox-iframe" border="0" style="width: 500px; height: 400px;" src="<%= authUrl %>"></iframe>',
-                    closeEffect: 'none',
-                    margin: [20, 60, 20, 60],
-                    nextEffect: 'none',
-                    openEffect: 'none',
-                    padding: 0,
-                    prevEffect: 'none',
-                    afterShow: function () {
-                        $('.fancybox-iframe').load(function () {
-                            this.contentWindow.postMessage('focus', '*');
-                        });
-                    }
-                });
+                event.preventDefault();
+                $.post('/data/form', $("#crecheForm").serialize())
+                OpenPopupCenter('/data', "FranceConnect_Identification", 500, 600);
             });
         } else {
             $("#crecheForm").unbind().attr('target', '');
