@@ -14,7 +14,7 @@
 				<security:authentication var="user" property="principal" />
 				
 				<p>Le fournisseur d'authentification va créer un objet Principal basé sur le <code>iss</code> et  <code>sub</code>
-				associés à votre ID token. cette valeur peut être utilisé dans l'application comme nom d'utilisateur unique (identifiant technique non manipulé par un humain).
+				associés à votre ID token. cette valeur peut être utilisée dans l'application comme nom d'utilisateur unique (identifiant technique non manipulé par un humain).
 				Votre Principal est : <code>${ user }</code></p>
 
 				<p>Le fournisseur d'authentification fournit uniquement les informations de connexion, les rôles sont déduits par l'application. Voici les rôles associés à votre compte:</p>
