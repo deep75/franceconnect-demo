@@ -69,13 +69,6 @@ router.post('/form', function (req, res) {
     res.redirect('/data/');
 });
 
-router.post('/form-ajax-update', function (req, res) {
-    console.log(req.params);
-    req.session.cantineParams = req.body;
-    res.json("OK");
-});
-
-
 router.get('/callback', passport.authenticate('provider', {
     successRedirect: '/data/authOk',
     failureRedirect: '/data/authKo',

@@ -114,22 +114,22 @@
 			<div>
 				<p class="well">
 					<security:authorize access="hasRole('ROLE_USER')">
-						<b><span class="text-success">Vous etes connectï¿½ !</span></b>
+						<b><span class="text-success">Vous êtes connecté !</span></b>
 					</security:authorize>
 					<security:authorize access="!hasRole('ROLE_USER')">
-						<b><span class="text-error">Vous n'ï¿½tes <em>PAS</em> connectï¿½.</span></b>			
+						<b><span class="text-error">Vous n'êtes <em>PAS</em> connecté.</span></b>			
 					</security:authorize>
 				</p>
 				
-				<p>Cette application de demo est configurï¿½ avec plusieurs pages nï¿½cessitant diffï¿½rents rï¿½les. 
-				Cette page ne nï¿½cessite pas d'ï¿½tre connectï¿½.
+				<p>Cette application de demo est configurée avec plusieurs pages nécessitant différents rôles. 
+				Cette page ne nécessite pas d'être connecté.
 				</p>
 			
 				<ul>
-					<li><a href="user">User</a>, nï¿½cessite d'ï¿½tre connectï¿½ avec le rï¿½le  <code>ROLE_USER</code> (Spring Security authority). Ce rï¿½le est donnï¿½es ï¿½ toute personne connectï¿½</li>
-					<li><a href="admin">Admin</a>, nï¿½cessite d'ï¿½tre connectï¿½ avec le rï¿½le <code>ROLE_ADMIN</code> (Spring Security authority). Ce rï¿½le est donnï¿½es uniquement aux personne ayant le nom 'admin'</li>
+					<li><a href="user">User</a>, nécessite d'être connecté avec le rôle  <code>ROLE_USER</code> (Spring Security authority). Ce rôle est donné à toute personne connectée</li>
+					<li><a href="admin">Admin</a>, nécessite d'être connecté avec le rôle <code>ROLE_ADMIN</code> (Spring Security authority). Ce rôle est donné uniquement aux personnes ayant le nom 'admin'</li>
 					<security:authorize access="hasRole('ROLE_USER')">
-						<li><a href="${pageContext.request.contextPath}/j_spring_security_logout">Dï¿½connexion</a></li>
+						<li><a href="${pageContext.request.contextPath}/j_spring_security_logout">Déconnexion</a></li>
 					</security:authorize>
 					<security:authorize access="!hasRole('ROLE_USER')">
 						<li><a href="${pageContext.request.contextPath}/admin/login" id="connexion">Connexion</a></li>

@@ -72,7 +72,7 @@
         Static issuer service, returns the same issuer for every request.
     -->
     <bean class="org.mitre.openid.connect.client.service.impl.StaticSingleIssuerService" id="staticIssuerService">
-        <property name="issuer" value="http://fcp.dev.dev-franceconnect.fr"/>
+        <property name="issuer" value="http://fcp.integ01.dev-franceconnect.fr"/>
     </bean>
 
 
@@ -89,13 +89,13 @@
           class="org.mitre.openid.connect.client.service.impl.StaticServerConfigurationService">
         <property name="servers">
             <map>
-                <entry key="http://fcp.dev.dev-franceconnect.fr">
+                <entry key="http://fcp.integ01.dev-franceconnect.fr">
                     <bean class="org.mitre.openid.connect.config.ServerConfiguration">
-                        <property name="issuer" value="http://fcp.dev.dev-franceconnect.fr"/>
+                        <property name="issuer" value="http://fcp.integ01.dev-franceconnect.fr"/>
                         <property name="authorizationEndpointUri"
-                                  value="http://fcp.dev.dev-franceconnect.fr/api/v1/authorize"/>
-                        <property name="tokenEndpointUri" value="http://fcp.dev.dev-franceconnect.fr/api/v1/token"/>
-                        <property name="userInfoUri" value="http://fcp.dev.dev-franceconnect.fr/api/v1/userinfo"/>
+                                  value="https://fcp.integ01.dev-franceconnect.fr/api/v1/authorize"/>
+                        <property name="tokenEndpointUri" value="https://fcp.integ01.dev-franceconnect.fr/api/v1/token"/>
+                        <property name="userInfoUri" value="https://fcp.integ01.dev-franceconnect.fr/api/v1/userinfo"/>
                         <property name="userInfoTokenMethod" value="HEADER"/>
                     </bean>
                 </entry>
@@ -110,7 +110,7 @@
  <bean id="staticClientConfigurationService" class="org.mitre.openid.connect.client.service.impl.StaticClientConfigurationService" >
      <property name="clients">
          <map>
-                 <entry key="http://fcp.dev.dev-franceconnect.fr">
+                 <entry key="http://fcp.integ01.dev-franceconnect.fr">
 
                   <bean class="org.mitre.oauth2.model.RegisteredClient">
                      <property name="clientId" value="34c64533186db4044adfa18482b0d108" />
@@ -137,7 +137,7 @@
           class="org.mitre.openid.connect.client.service.impl.StaticClientConfigurationService">
         <property name="clients">
             <map>
-                <entry key="http://fcp.dev.dev-franceconnect.fr">
+                <entry key="http://fcp.integ01.dev-franceconnect.fr">
 
                     <bean class="org.mitre.oauth2.model.RegisteredClient">
                         <property name="clientId" value="34c64533186db4044adfa18482b0d108"/>
