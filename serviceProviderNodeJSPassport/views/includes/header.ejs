@@ -10,6 +10,7 @@
             <% if (user) { %>
             <span class="span6" style="color:white">Merci de vous être identifié, <%= user %>.<br/>
                 <button class="btn btn-default" onclick="window.location = '/logout'">Se déconnecter</button>
+                <button class="btn btn-default" onclick="window.location = '/logout?force'">Se déconnecter sans confirmation</button>
             </span>
             <% } else { %>
             <div class="span6 connect">
