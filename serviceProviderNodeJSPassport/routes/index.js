@@ -65,7 +65,11 @@ router.get('/get-data', function (req, res) {
 
 router.get('/logout', function (req, res) {
     req.session.destroy();
-    res.redirect(config.openIdConnectStrategyParameters.logoutURL);
+    if (req.query.hasOwnProperty('force')) {
+        res.redirect(config.openIdConnectStrategyParameters.logoutURL+'?force');
+    } else {
+        res.redirect(config.openIdConnectStrategyParameters.logoutURL);
+    }
 });
 
 router.get('/blank', function (req, res) {
