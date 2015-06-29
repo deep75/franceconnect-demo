@@ -45,7 +45,7 @@ passport.deserializeUser(function (obj, done) {
 
 router.get('/', function (req, res, next) {
     next();
-}, passport.authenticate('provider', {consents:1}), function (req, res, next) {
+}, passport.authenticate('provider'), function (req, res, next) {
     console.log('got through the oauth2 authentication process.');
 });
 
