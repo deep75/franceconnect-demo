@@ -118,5 +118,21 @@ ul.social li {
 }
 
 .connect {
-    color: #ffffff;
+    color: #FFFFFF;
+}
+
+.connect :visited {
+    color: #FFFFFF;
+}
+
+.connect:hover {
+    color: #FFFFFF;
+}
+
+.connect-img {
+    padding: 0 4px 0 4px;
+}
+
+.connect-img:hover {
+    background-color: #FFFFFF;
 }
