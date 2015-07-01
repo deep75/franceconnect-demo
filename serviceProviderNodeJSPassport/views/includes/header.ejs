@@ -5,7 +5,7 @@
         <div class="span3">
             <h2 style="color: white">GUICHET DES PARISIENS</h2>
         </div>
-        <div class="span4"></div>
+        <div class="span3"></div>
         <div class="span4">
             <% if (user) { %>
             <span class="span6" style="color:white">Merci de vous être identifié, <%= user %>.<br/>
@@ -16,9 +16,10 @@
             </span>
             <% } else { %>
             <div class="span6">
-                <a id="fc_login" class="connect" rel="group" href="/login_org">
-                    Identifiez-vous
-                    <img src="/images/fc_logo.png" class="connect-img" alt="se connecter avec FranceConnect" name="FranceConnect" width="44px"/>
+                <a id="fc_login" href="/login_org" class="btn btn-default" style="color: #0b6ba8; width: 182px" role="button">
+                    <img src="/images/fc_logo.png" style="float:left; width: 38px" alt="se connecter avec FranceConnect"
+                         name="FranceConnect"/>
+                Identifiez-vous avec FranceConnect
                 </a>
             </div>
             <% } %>
