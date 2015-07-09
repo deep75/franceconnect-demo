@@ -7,7 +7,7 @@ var crypto = require('crypto');
 var indexController = new (require('../controllers/index.js').IndexController)();
 
 function checkStateParams(req, res, next) {
-    if (req.session.state !== req.query.state) {
+    if (!req.query.error && req.session.state !== req.query.state) {
         return res.status(401).send({error: {'name': 'invalid_state', 'message': 'invalid state'}});
     } else {
         next();
