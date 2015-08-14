@@ -85,6 +85,7 @@ router.get('/authOk', function (req, res, next) {
         }
     };
     request.get(options, function (err, response, body) {
+        console.log(body)
         if (err) {
             console.error('Error while reaching FD');
             console.error(err);

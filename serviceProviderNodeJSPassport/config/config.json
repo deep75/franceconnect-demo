@@ -1,5 +1,6 @@
 {
   "env": "development",
+  "fcURL": "http://fcp.dev.dev-franceconnect.fr/",
   "openIdConnectStrategyParameters": {
     "clientID": "5a643bb4569e324e3814d9d32c4092a4",
     "clientSecret": "d8844a92d54c7404129e2bb6e33506fa",
