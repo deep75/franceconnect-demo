@@ -93,39 +93,41 @@ PassportAuthenticateWithCustomClaims.prototype.authenticate = function(req, opti
                     }, null, null, function (err, body) {
                         if (err) {
                             console.error('error when accessing userInfo with FI '+req.headers.referer+' : '+err);
-                            return self.fail({redirect_uri: options.failureRedirect});
-                        }
+                            req.res.send('<h1>Erreur lors de la récupération des informations d\'identité</h1><h2>StatusCode '+err.statusCode+'</h2><p>Erreur : <pre>'+err.data+'</pre></p>');
+                        } else {
+                            var json;
+                            var profile = {};
+                            try {
+                                json = JSON.parse(body);
+                                json.sub = json.sub.toString();
 
-                        var json;
-                        var profile = {};
-                        try {
-                            json = JSON.parse(body);
-                            json.sub = json.sub.toString();
+                                profile.id = json.sub;
+                                // Prior to OpenID Connect Basic Client Profile 1.0 - draft 22, the
+                                // "sub" key was named "user_id".  Many providers still use the old
+                                // key, so fallback to that.
+                                if (!profile.id) {
+                                    profile.id = json.user_id;
+                                }
 
-                            profile.id = json.sub;
-                            // Prior to OpenID Connect Basic Client Profile 1.0 - draft 22, the
-                            // "sub" key was named "user_id".  Many providers still use the old
-                            // key, so fallback to that.
-                            if (!profile.id) {
-                                profile.id = json.user_id;
+                                profile.displayName = json.name;
+                                profile.name = {
+                                    familyName: json.family_name,
+                                    givenName: json.given_name,
+                                    middleName: json.middle_name
+                                };
+
+                                profile._raw = body;
+
+                                profile._json = json;
+                            }
+                            catch (e) {
+                                console.error('error parsing id token from FI ' + req.headers.referer + ': ' + e);
+                                return self.fail({redirect_uri: options.failureRedirect});
                             }
 
-                            profile.displayName = json.name;
-                            profile.name = { familyName: json.family_name,
-                                givenName: json.given_name,
-                                middleName: json.middle_name };
-
-                            profile._raw = body;
-
-                            profile._json = json;
+                            //TODO : tests, gros changements par rapport à la strat custom FC
+                            onProfileLoaded(profile);
                         }
-                        catch (e) {
-                            console.error('error parsing id token from FI '+req.headers.referer+': '+e);
-                            return self.fail({redirect_uri: options.failureRedirect});
-                        }
-
-                        //TODO : tests, gros changements par rapport à la strat custom FC
-                        onProfileLoaded(profile);
                     });
                 } else {
                     onProfileLoaded();
