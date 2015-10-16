@@ -3,6 +3,7 @@ var passport = require('passport');
 var router = express.Router();
 var config = (new (require('../helpers/configManager.js'))())._rawConfig;
 var url = require('url');
+var jwt = require('jwt-simple');
 var crypto = require('crypto');
 var indexController = new (require('../controllers/index.js').IndexController)();
 
@@ -66,11 +67,12 @@ router.get('/get-data', function (req, res) {
 router.get('/logout', function (req, res) {
     delete req.session.passport.user;
     delete req.session.user;
+    var idTokenHint = jwt.encode({aud:config.openIdConnectStrategyParameters.clientID}, config.openIdConnectStrategyParameters.clientSecret);
     req.session.state = crypto.randomBytes(25).toString('hex');
     if (req.query.hasOwnProperty('force')) {
-        res.redirect(config.openIdConnectStrategyParameters.logoutURL+'?force&state='+req.session.state);
+        res.redirect(config.openIdConnectStrategyParameters.logoutURL+'?id_token_hint='+idTokenHint+'&force&state='+req.session.state);
     } else {
-        res.redirect(config.openIdConnectStrategyParameters.logoutURL+'?state='+req.session.state);
+        res.redirect(config.openIdConnectStrategyParameters.logoutURL+'?id_token_hint='+idTokenHint+'&state='+req.session.state);
     }
 });
 
