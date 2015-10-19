@@ -3,18 +3,19 @@ var passport = require('passport');
 var router = express.Router();
 var config = (new (require('../helpers/configManager.js'))())._rawConfig;
 var url = require('url');
+var jwt = require('jwt-simple');
 var crypto = require('crypto');
 var indexController = new (require('../controllers/index.js').IndexController)();
 
 function checkStateParams(req, res, next) {
-    if (!req.query.error && req.session.state !== req.query.state) {
+    if (req.query && req.query.state && !req.query.error && req.session.state !== req.query.state) {
         return res.status(401).send({error: {'name': 'invalid_state', 'message': 'invalid state'}});
     } else {
         next();
     }
 }
 
-router.get('/', indexController.handleMain);
+router.get('/', checkStateParams,indexController.handleMain);
 
 router.get('/login_org', passport.authenticate('openidconnect'), function (req, res) {
 });
@@ -64,11 +65,14 @@ router.get('/get-data', function (req, res) {
 });
 
 router.get('/logout', function (req, res) {
-    req.session.destroy();
+    delete req.session.passport.user;
+    delete req.session.user;
+    var idTokenHint = jwt.encode({aud:config.openIdConnectStrategyParameters.clientID}, config.openIdConnectStrategyParameters.clientSecret);
+    req.session.state = crypto.randomBytes(25).toString('hex');
     if (req.query.hasOwnProperty('force')) {
-        res.redirect(config.openIdConnectStrategyParameters.logoutURL+'?force');
+        res.redirect(config.openIdConnectStrategyParameters.logoutURL+'?id_token_hint='+idTokenHint+'&force&state='+req.session.state);
     } else {
-        res.redirect(config.openIdConnectStrategyParameters.logoutURL);
+        res.redirect(config.openIdConnectStrategyParameters.logoutURL+'?id_token_hint='+idTokenHint+'&state='+req.session.state);
     }
 });
 
