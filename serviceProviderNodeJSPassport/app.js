@@ -38,6 +38,8 @@ app.use(session({ secret: 'Some Secret !!!', key: 'sid'}));
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.locals.FCUrl = config.fcURL;
+
 var strat = function() {
     var strategy = new OpenIdConnectStrategy(config.openIdConnectStrategyParameters, function (iss, sub, profile, accesstoke, refreshtoken, done) {
         process.nextTick(function () {
