@@ -1,21 +1,21 @@
 {
-  "env": "development",
+  "env":"development",
   "openIdConnectStrategyParameters": {
-    "clientID": "5a643bb4569e324e3814d9d32c4092a4",
-    "clientSecret": "d8844a92d54c7404129e2bb6e33506fa",
-    "callbackURL": "http://localhost:3001/oidc_callback?testkey=testvalue",
-    "authorizationURL": "http://fcp.dev.dev-franceconnect.fr/api/v1/authorize",
-    "tokenURL": "http://fcp.dev.dev-franceconnect.fr/api/v1/token",
-    "userInfoURL": "http://fcp.dev.dev-franceconnect.fr/api/v1/userinfo",
-    "logoutURL":"http://fcp.dev.dev-franceconnect.fr/api/v1/logout",
+    "clientID": "a414b3ee28fbab09ded61f26b3cd027b",
+    "clientSecret": "5ou7b64o7v9qkmraxyrta43epf7ryh7ll88ealhzyqps43uc5o",
+    "callbackURL": "http://mairieparis-franceconnect.fr:3001/oidc_callback?testkey=testvalue",
+    "authorizationURL": "http://franceconnect-franceconnect.fr:3000/api/v1/authorize",
+    "tokenURL": "http://franceconnect-franceconnect.fr:3000/api/v1/token",
+    "userInfoURL": "http://franceconnect-franceconnect.fr:3000/api/v1/userinfo",
+    "logoutURL":"http://franceconnect-franceconnect.fr:3000/api/v1/logout",
     "acr_values":"eidas2",
     "scope": ["profile", "email", "address", "phone", "openid"]
   },
   "oauth": {
-    "authorizationURL": "http://fcp.dev.dev-franceconnect.fr/api/v1/authorize",
-    "tokenURL": "http://fcp.dev.dev-franceconnect.fr/api/v1/token",
-    "callbackURL": "http://localhost:3001/data/callback",
-    "scopes": ["revenu_fiscal_de_reference"]
+    "authorizationURL": "http://franceconnect-franceconnect.fr:3000/api/v1/authorize",
+    "tokenURL": "http://franceconnect-franceconnect.fr:3000/api/v1/token",
+    "callbackURL": "http://mairieparis-franceconnect.fr:3001/data/callback",
+    "scopes": ["revenu_fiscal_de_reference", "attestation_droit", "adresse_postale"]
   },
-  "quotientFamilialURL": "http://fdp.dev.dev-franceconnect.fr/quotientFamilial"
+  "quotientFamilialURL": "http://localhost:3052/quotientFamilial"
 }
