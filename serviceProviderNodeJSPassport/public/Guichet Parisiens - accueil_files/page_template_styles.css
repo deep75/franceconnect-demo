@@ -136,3 +136,21 @@ ul.social li {
 .connect-img:hover {
     background-color: #FFFFFF;
 }
+
+.logo-demo {
+    text-align: center;
+    text-transform: uppercase;
+    position: absolute;
+    top: 26px;
+    right: -65px;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    width: 150px;
+    background-color: #C9131F;
+    color: #fff;
+    padding: 25px;
+    font-size: 15px;
+    font-weight: 700;
+    width: 200px;
+    z-index: 10;
+}
