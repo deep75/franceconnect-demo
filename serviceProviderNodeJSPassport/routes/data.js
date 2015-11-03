@@ -51,7 +51,9 @@ router.get('/', function (req, res, next) {
 
 router.get('/form', function (req, res, next) {
     if (req.session.passport.user) {
-        req.session.user = req.session.passport.user.name.givenName + " " + req.session.passport.user.name.familyName;
+        if (!req.session.user) {
+            req.session.user = req.session.passport.user.name.givenName + " " + req.session.passport.user.name.familyName;
+        }
         res.render('demarche-form.ejs', {
             title: 'Démonstrateur France Connect - Inscription à la cantine scolaire',
             user: req.session.user,
