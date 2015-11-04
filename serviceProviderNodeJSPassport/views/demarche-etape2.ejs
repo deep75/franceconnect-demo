@@ -1,26 +1,37 @@
 <% include includes/header.ejs %>
 <div class="row-fluid">
     <% include includes/voirie-panel.ejs %>
-    <div class="span6 well well-small">
-        <h2>Votre inscription est confirmée :</h2>
-
-        <h4 style="color: black">Pour votre enfant
-            <strong><%= informationsCantine.prenomEnfant + ' ' + informationsCantine.nomEnfant %></strong>,
-            le montant à régler pour un repas de cantine sera de <span
-                    style="text-decoration:underline"><strong>3.64 euros</strong></span>.</h4>
-
-        <p><em>Pour information, votre revenu fiscal utilisé pour calculer le montant du règlement est
-                de <%= data %> euros.
-                Cette information provient directement de l'administration fiscale.</em></p>
-
-        <p><em>Pour information, votre adresse est 20 rue Desaix, 75015 Paris. Cette information provient
-                directement d'EDF.</em></p>
-
-        <p><em>Pour information, votre attestation de droit provient directement de
-                l'assurance maladie.</em></p>
-
-        <p>
-            <a href="/data/fin-demarche" class="btn btn-large">Valider</a>
+    <div class="span6">
+        <div class="alert alert-info">
+            <h4>Le montant de chaque repas sera de : <span class="pull-right">3.64 euros</span></h4>
+        </div>
+        <h4>Vos informations</h4>
+        <hr/>
+        <table class="table table-bordered table-striped">
+            <tr>
+                <td>Motif de la demande</td>
+                <td>Inscription pour la cantine période: <b>2015-2016</b></td>
+            </tr>
+            <tr>
+                <td>Vous êtes</td>
+                <td><b><%= user %></b></td>
+            </tr>
+            <tr>
+                <td>Votre adresse</td>
+                <td><b>7 Rue de l'Arche Sèche, 44000 Nantes</b></td>
+            </tr>
+            <tr>
+                <td>Votre enfant</td>
+                <td><b><%= informationsCantine.prenomEnfant + ' ' + informationsCantine.nomEnfant %></b></td>
+            </tr>
+            <tr>
+                <td>Montant de la base fiscale utilisé</td>
+                <td><b><%= data %> &euro;</b></td>
+            </tr>
+        </table>
+        <p class="text-center">
+            <a class="btn btn-large">Annuler</a>
+            <a href="/data/fin-demarche" class="btn btn-large btn-primary">Confirmer l'inscription</a>
         </p>
     </div>
 </div>

@@ -12,8 +12,26 @@ legend {
     font-size: 18px;
 }
 
+h1, h2, h3, h4, h5, h6 {
+    color: inherit;
+}
+
+b {
+    color: #11ABC5;
+}
+
+.alert-info {
+    color: #126b9e;
+}
+
 #fc_login img {
     width: 250px;
+}
+
+#btn-deconnect {
+    border: 0;
+    color: #11ABC5;
+    background-color: #11ABC5;
 }
 
 .text-center {
@@ -21,11 +39,17 @@ legend {
 }
 
 .logo {
-    width: 120px;
+    width: 160px;
+    margin-right: 15px;
 }
 
 .form-actions {
     background-color: #ffffff;
+}
+
+h2.title {
+    display: inline-block;
+    vertical-align: top;
 }
 
 .title a, .title a:hover {
@@ -43,6 +67,7 @@ legend {
     background: none repeat scroll 0 0 #11ABC5;
     display: block;
     margin-bottom: 10px;
+    padding: 15px 0;
 }
 
 .well-gu {
@@ -275,4 +300,13 @@ a.twt {
     font-weight: 700;
     width: 200px;
     z-index: 10;
+}
+
+#fconnect-profile {
+    margin-top: 20px;
+}
+
+#fconnect-profile .caret {
+    border-top-color: #FFFFFF;
+    vertical-align: super;
 }

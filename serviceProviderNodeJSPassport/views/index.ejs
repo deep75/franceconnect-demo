@@ -26,7 +26,7 @@
     <div class="span6 well">
         <h4>Avec le Guichet des Nantais vous pouvez :</h4>
         <ul class="list-main-content">
-            <li>Accéder aux différentes démarches administratives en ligne de la ville de Nantes %></li>
+            <li>Accéder aux différentes démarches administratives en ligne de la ville de Nantes</li>
             <li>Retouver l'historique de vos demandes dans votre espace personnel</li>
             <li>Etre informé de l'état d'avancement de l'instruction de vos demandes</li>
         </ul>
@@ -36,7 +36,7 @@
         </div>
     </div>
     <div class="span6 well">
-        <h4>Gagnez du temps dans la réalisation de vos démarches en vous connectant par France Connect!</h4>
+        <h4>Gagnez du temps dans la réalisation de vos démarches en vous connectant par FranceConnect!</h4>
         <p>Connectez vous à l'administration <b>en toute sécurité</b>, <b>sans créer de nouveau compte</b>.</p>
         <div class="span12 connect">
             <a id="fc_login" rel="group" href="/login_org" modal="true" autoHeight="false" autoSize="false">
@@ -46,4 +46,13 @@
     </div>
     <% } %>
 </div>
+<script type="text/javascript">
+    var screenTabletWith = 767;
+    $('#fc_login').click(function (event) {
+        if ($(window).width() > screenTabletWith) {
+            event.preventDefault();
+            OpenPopupCenter(this.href, "FranceConnect_Identification", 600, 600);
+        }
+    });
+</script>
 <% include includes/footer %>
