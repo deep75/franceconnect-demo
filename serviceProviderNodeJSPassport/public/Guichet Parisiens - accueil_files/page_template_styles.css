@@ -310,3 +310,8 @@ a.twt {
     border-top-color: #FFFFFF;
     vertical-align: super;
 }
+
+.container-fluid {
+    position: relative;
+    overflow: hidden;
+}
