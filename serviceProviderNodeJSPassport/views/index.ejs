@@ -2,31 +2,57 @@
 <div class="row-fluid">
     <% include includes/voirie-panel.ejs %>
 
-    <div class="span6 well">
-        <% if (user) { %>
-
-        <h2>Inscrivez vos enfants à la cantine municipale via FranceConnect :</h2>
-        <ul>
-            <li>Connectez-vous simplement avec avec le compte de votre choix
-            </li>
-            <li>Récupérez automatiquement les informations personnelles nécessaires à la démarche
-            </li>
+    <% if (user) { %>
+    <div class="span6">
+        <p>Pour vous faciliter la vie au quotidien, la ville de Nantais vous propose de faire certaines de vos demandes ou démarches municipales en ligne.</p>
+        <p>L'espace usager vous offre la possibilité de suivre ces demandes 24h/24 et 7 jours/7</p>
+    </div>
+    <div class="span3 well well-gu">
+        <h4>Voirie</h4>
+        <ul class="unstyled">
+            <li>Demande de carte de stationnement résidentiel ou de carte véhicule électrique</li>
+            <li>Autorisation pour un déménagement</li>
         </ul>
-        <a class="btn btn-large btn-primary" rel="group"
-           href="/data/form" name="demarrer" id="demarrer">Démarrer la démarche via FranceConnect</a>
-        </a>
-        <% } else { %>
-        <h2>Avec le Guichet des Parisiens vous pouvez :</h2>
-
-        <ul>
-            <li>Accéder aux différentes démarches administratives en ligne de la ville de Paris</li>
-            <li>Retouver l'historique de vos demandes dans votre espace personnel
-            </li>
+    </div>
+    <div class="span3 well well-gu">
+        <h4>Famille et logement</h4>
+        <ul class="unstyled">
+            <li><a id="pre-inscription-scolaire"class="label-demand" href="/data/form">Inscription cantine scolaire</a></li>
+            <li>Calcul du quotient familial</li>
+            <li>Cotation de votre logement</li>
+        </ul>
+    </div>
+    <% } else { %>
+    <div class="span6 well">
+        <h4>Avec le Guichet des Nantais vous pouvez :</h4>
+        <ul class="list-main-content">
+            <li>Accéder aux différentes démarches administratives en ligne de la ville de Nantes</li>
+            <li>Retouver l'historique de vos demandes dans votre espace personnel</li>
             <li>Etre informé de l'état d'avancement de l'instruction de vos demandes</li>
         </ul>
-
-        <h4>Identifiez-vous pour accéder aux démarches</h4>
-        <% } %>
+        <div class="text-center">
+            <a class="btn btn-large btn-main" href="/inscription">CREER UN COMPTE</a>
+            <a class="btn btn-large btn-main" href="/login">ME CONNECTER</a>
+        </div>
     </div>
+    <div class="span6 well">
+        <h4>Gagnez du temps dans la réalisation de vos démarches en vous connectant par FranceConnect!</h4>
+        <p>Connectez vous à l'administration <b>en toute sécurité</b>, <b>sans créer de nouveau compte</b>.</p>
+        <div class="span12 connect">
+            <a id="fc_login" rel="group" href="/login_org" modal="true" autoHeight="false" autoSize="false">
+                <img src="/images/btn_FC.svg" alt="connexion avec FranceConnect"/>
+            </a>
+        </div>
+    </div>
+    <% } %>
 </div>
+<script type="text/javascript">
+    var screenTabletWith = 767;
+    $('#fc_login').click(function (event) {
+        if ($(window).width() > screenTabletWith) {
+            event.preventDefault();
+            OpenPopupCenter(this.href, "FranceConnect_Identification", 600, 600);
+        }
+    });
+</script>
 <% include includes/footer %>
