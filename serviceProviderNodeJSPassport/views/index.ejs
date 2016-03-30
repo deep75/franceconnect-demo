@@ -4,9 +4,35 @@
 
     <% if (user) { %>
     <div class="span6">
+        <% if (userInfo) { %>
+        <div class="dropdown">
+            <a id="user-identity-dropdown" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+               aria-haspopup="true"
+               aria-expanded="false"><h4>Bonjour <%= user %> <span class="caret"></span></h4></a>
+            <ul id="user-identity-info" class="dropdown-menu" aria-labelledby="user-identity-dropdown">
+                <li><a href="#">given_name: <%= userInfo.given_name%></a></li>
+                <li><a href="#">family_name: <%= userInfo.family_name%></a></li>
+                <li><a href="#">birthdate: <%= userInfo.birthdate%></a></li>
+                <li><a href="#">gender: <%= userInfo.gender%></a></li>
+                <li><a href="#">birthplace: <%= userInfo.birthplace%></a></li>
+                <li><a href="#">birthcountry: <%= userInfo.birthcountry%></a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="#">email: <%= userInfo.email%></a></li>
+                <li><a href="#">preferred_username: <%= userInfo.preferred_username%></a></li>
+                <% if (userInfo.address) { %>
+                <li><a href="#">address.formatted: <%= userInfo.address.formatted%></a></li>
+                <% } %>
+                <li><a href="#">phone_number: <%= userInfo.phone_number%></a></li>
+            </ul>
+        </div>
+        <% } %>
         <p>Pour vous faciliter la vie au quotidien, la ville de Nantais vous propose de faire certaines de vos demandes ou démarches municipales en ligne.</p>
         <p>L'espace usager vous offre la possibilité de suivre ces demandes 24h/24 et 7 jours/7</p>
     </div>
+
+
+
+
     <div class="span3 well well-gu">
         <h4>Voirie</h4>
         <ul class="unstyled">
