@@ -2,8 +2,8 @@
   "env": "development",
   "fcURL": "https://fcp.integ01.dev-franceconnect.fr/",
   "openIdConnectStrategyParameters": {
-    "clientID": "CHANGE_ME",
-    "clientSecret": "CHANGE_ME",
+    "clientID": "6b7810faf431be33d89166cf605ca806",
+    "clientSecret": "c282d4d8a6670db9b66f490cbda1a746",
     "callbackURL": "http://localhost:3001/oidc_callback",
     "authorizationURL": "https://fcp.integ01.dev-franceconnect.fr/api/v1/authorize",
     "tokenURL": "https://fcp.integ01.dev-franceconnect.fr/api/v1/token",
