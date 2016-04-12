@@ -176,8 +176,8 @@ PassportAuthenticateWithCustomClaims.prototype.authenticate = function(req, opti
             });
         });
     } else {
-        //var params = this.authorizationParams(options);
-        var params = {};
+        var authorizeURL = url.parse(this._authorizationURL, true);
+        var params = authorizeURL.query;
         params['response_type'] = 'code';
         params['client_id'] = this._clientID;
         params['redirect_uri'] = callbackURL;
@@ -199,9 +199,8 @@ PassportAuthenticateWithCustomClaims.prototype.authenticate = function(req, opti
         }
 
         params.scope = scope;
-
-        var location = this._authorizationURL + '?' + querystring.stringify(params);
-        this.redirect(location);
+        delete authorizeURL.search;
+        this.redirect(url.format(authorizeURL));
     }
 };
 
