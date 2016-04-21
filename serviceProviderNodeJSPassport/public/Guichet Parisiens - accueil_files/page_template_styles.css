@@ -24,8 +24,16 @@ b {
     color: #126b9e;
 }
 
-#fc_login img {
-    width: 250px;
+#fc_login {
+    display: block;
+    text-indent: -9999px;
+    height: 80px;
+    background: url('../images/btn_FC.svg') no-repeat center;
+    background-size: 250px;
+}
+#fc_login:hover {
+    background: url('../images/btn_FC_active.svg') no-repeat center;
+    background-size: 250px;
 }
 
 #btn-deconnect {
