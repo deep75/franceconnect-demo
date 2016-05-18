@@ -1,5 +1,11 @@
-service-providers-examples
+Exemple de fournisseur de services avec FranceConnect
 ==========================
+
+Avec Docker, lancez la comande suivante :
+
+```
+docker run -d -p 80:3001 --name franceconnect-demo mcas/franceconnect-demo
+```
 
 Exemples de fournisseurs de services pour France-connect :
 - 1 exemple en NodeJS avec la librairie Passport
