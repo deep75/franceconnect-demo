@@ -1,0 +1,15 @@
+machine:
+  services:
+    - docker
+
+dependencies:
+  pre:
+    - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+
+  override:
+    - docker pull mcas/franceconnect-demo:latest || true
+
+test:
+  override:
+    - docker build -t mcas/franceconnect-demo:latest .
+    - docker push mcas/franceconnect-demo:latest
