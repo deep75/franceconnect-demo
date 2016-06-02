@@ -1,0 +1,19 @@
+franceconnect-demo:
+  health_check:
+    port: 3001
+    interval: 2000
+    initializing_timeout: 60000
+    unhealthy_threshold: 3
+    strategy: none
+    healthy_threshold: 2
+    response_timeout: 2000
+LB-FC:
+  scale: 1
+  load_balancer_config:
+    haproxy_config: {}
+  health_check:
+    port: 42
+    interval: 2000
+    unhealthy_threshold: 3
+    healthy_threshold: 2
+    response_timeout: 2000
