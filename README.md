@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/deep75/franceconnect-demo.png?label=ready&title=Ready)](https://waffle.io/deep75/franceconnect-demo)
 Exemple de fournisseur de services avec FranceConnect
 ==========================
 
