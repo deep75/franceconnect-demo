@@ -1,15 +1,35 @@
-FROM node:argon
+## BUILDING
+##   (from project root directory)
+##   $ docker build -t node-js-for-deep75-franceconnect-demo .
+##
+## RUNNING
+##   $ docker run -p 3000:3000 node-js-for-deep75-franceconnect-demo
+##
+## CONNECTING
+##   Lookup the IP of your active docker host using:
+##     $ docker-machine ip $(docker-machine active)
+##   Connect to the container at DOCKER_IP:3000
+##     replacing DOCKER_IP for the IP of your active docker host
 
-# Create app directory
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
+FROM gcr.io/stacksmith-images/ubuntu-buildpack:14.04-r9
 
-# Install app dependencies
-COPY serviceProviderNodeJSPassport/package.json /usr/src/app/
+MAINTAINER Bitnami <containers@bitnami.com>
+
+ENV STACKSMITH_STACK_ID="3f1pqjy" \
+    STACKSMITH_STACK_NAME="Node.js for deep75/franceconnect-demo" \
+    STACKSMITH_STACK_PRIVATE="1"
+
+RUN bitnami-pkg install node-4.5.0-0 --checksum af047acbfe0c0f918536de0dfa690178808d2e5fc07dfa7acc34c77f0a60fd55
+
+ENV PATH=/opt/bitnami/node/bin:/opt/bitnami/python/bin:$PATH \
+    NODE_PATH=/opt/bitnami/node/lib/node_modules
+
+## STACKSMITH-END: Modifications below this line will be unchanged when regenerating
+
+# Node base template
+COPY . /app
+WORKDIR /app
+
 RUN npm install
 
-# Bundle app source
-COPY serviceProviderNodeJSPassport /usr/src/app
-
-EXPOSE 3001
-CMD [ "npm", "start" ]
+CMD ["node"]
