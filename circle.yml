@@ -1,0 +1,25 @@
+machine:
+  services:
+    - docker
+
+dependencies:
+  override:
+    - wget https://github.com/rancher/rancher-compose/releases/download/v0.8.2/rancher-compose-linux-amd64-v0.8.2.tar.gz
+    - tar -xvzf rancher-compose-linux-amd64-v0.8.2.tar.gz
+    - docker info
+    - docker build -t mcas/franceconnect-demo:latest .
+
+test:
+  override:
+    - docker run -d -p 80:3001 --name franceconnect-demo mcas/franceconnect-demo; sleep 30
+    - curl --retry 10 --retry-delay 5 -v http://localhost:80
+
+deployment:
+  hub:
+    branch: master
+    commands:
+      - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+      - docker push mcas/franceconnect-demo:latest
+      - ./rancher-compose-v0.8.2/rancher-compose --url http://$RANCHER_SERVER:8080 --access-key $RANCHER_ACCESS_KEY --secret-key $RANCHER_SECRET_KEY -p FranceConnect rm franceconnect-demo; sleep 30
+      - ./rancher-compose-v0.8.2/rancher-compose --url http://$RANCHER_SERVER:8080 --access-key $RANCHER_ACCESS_KEY --secret-key $RANCHER_SECRET_KEY -p FranceConnect up -d; sleep 10
+      - curl --retry 10 --retry-delay 5 -v http://$FC_DEMO:80

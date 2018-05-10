@@ -1,0 +1,17 @@
+franceconnect-demo:
+  ports:
+  - 3001:3001/tcp
+  labels:
+    io.rancher.scheduler.global: 'true'
+    io.rancher.container.pull_image: always
+  tty: true
+  image: mcas/franceconnect-demo:latest
+  stdin_open: true
+LB-FC:
+  ports:
+  - 80:3001
+  tty: true
+  image: rancher/load-balancer-service
+  links:
+  - franceconnect-demo:franceconnect-demo
+  stdin_open: true

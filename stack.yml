@@ -1,0 +1,11 @@
+version: "3"
+
+services:
+
+  main:
+    image: mcas/franceconnect-demo:latest
+    ports:
+      - 80:3001
+    deploy:
+      placement:
+constraints: [node.role == worker]
