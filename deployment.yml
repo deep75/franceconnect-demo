@@ -6,7 +6,7 @@ metadata:
     flux.weave.works/automated: "true"
   name: fcdemo-app
 spec:
-  replicas: 3
+  replicas: 4
   template:
     metadata:
       labels:
@@ -14,9 +14,9 @@ spec:
     spec:
       containers:
       - name: fcdemo-app
-        image: mcas/franceconnect-agent-demo:latest
+        image: mcas/franceconnect-demo:latest
         ports:
-        - containerPort: 8000
+        - containerPort: 3001
 ---
 apiVersion: v1
 kind: Service
@@ -29,7 +29,7 @@ spec:
   ports:
     # the port that this service should serve on
   - port: 80
-    targetPort: 8000
+    targetPort: 3001
     protocol: TCP
   selector:
     app: fcdemo-app
