@@ -12,7 +12,7 @@ spec:
     spec:
       containers:
       - name: fcdemo-app
-        image: mcas/franceconnect-demo:189543
+        image: mcas/franceconnect-demo:latest
         ports:
         - containerPort: 3001
 ---
