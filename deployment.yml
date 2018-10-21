@@ -3,6 +3,8 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: fcdemo-app
+  annotations:
+    flux.weave.works/automated: 'true'
 spec:
   replicas: 4
   template:
