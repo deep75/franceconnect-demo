@@ -5,7 +5,7 @@ metadata:
     flux.weave.works/automated: "true"
   name: fcdemo-app
 spec:
-  replicas: 2
+  replicas: 3
   template:
     metadata:
       labels:
@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
       - name: fcdemo-app
-        image: mcas/franceconnect-demo:189543       
+        image: mcas/franceconnect-demo:latest       
         ports:
         - containerPort: 3001
 ---
@@ -24,7 +24,7 @@ metadata:
   labels:
     app: fcdemo-service
 spec:
-  type: NodePort
+  type: LoadBalancer
   ports:
     # the port that this service should serve on
     - port: 80
