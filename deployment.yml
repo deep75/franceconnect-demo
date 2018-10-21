@@ -14,9 +14,9 @@ spec:
     spec:
       containers:
       - name: fcdemo-app
-        image: mcas/franceconnect-demo:189543
+        image: mcas/franceconnect-agent-demo:latest
         ports:
-        - containerPort: 3001
+        - containerPort: 8000
 ---
 apiVersion: v1
 kind: Service
@@ -29,7 +29,7 @@ spec:
   ports:
     # the port that this service should serve on
   - port: 80
-    targetPort: 3001
+    targetPort: 8000
     protocol: TCP
   selector:
     app: fcdemo-app
