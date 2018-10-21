@@ -1,0 +1,1 @@
+{"jobID":"63144d0e-569d-4d3f-de28-da7fe7315811","spec":{"type":"policy","cause":{"Message":"","User":"aldonero nedlara \u003cdelinah@tcnmistakes.com\u003e"},"spec":{"default:deployment/fcdemo-app":{"add":{"automated":"true"},"remove":null}}},"result":null}
