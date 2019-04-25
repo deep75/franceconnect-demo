@@ -1,6 +1,8 @@
 Exemple de fournisseur de services avec FranceConnect
 ==========================
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/deep75/franceconnect-demo.svg)](https://greenkeeper.io/)
+
 Avec Docker, lancez la comande suivante :
 
 ```
