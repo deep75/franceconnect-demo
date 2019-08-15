@@ -6,7 +6,7 @@ metadata:
   annotations:
     flux.weave.works/automated: 'true'
 spec:
-  replicas: 4
+  replicas: 2
   template:
     metadata:
       labels:
@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: fcdemo-app
-        image: mcas/franceconnect-demo:master
+        image: mcas/franceconnect-demo:latest
         ports:
         - containerPort: 3001
 ---
