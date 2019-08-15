@@ -1,10 +1,10 @@
-FROM node:10-alpine as build
+FROM node:12-alpine as build
 
 WORKDIR /app
 COPY . ./
 RUN npm install
 
-FROM node:10-alpine
+FROM node:12-alpine
 
 COPY --from=build /app /
 EXPOSE 3001
