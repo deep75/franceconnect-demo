@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "./bin/www"
+    "start": "./bin/www",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "dependencies": {
     "body-parser": "~1.8.1",
@@ -23,11 +25,13 @@
     "pm2": "^2.10.3",
     "remove": "~0.1.5",
     "request": "~2.82.0",
-    "serve-favicon": "^2.5.0"
+    "serve-favicon": "^2.5.0",
+    "snyk": "^1.316.2"
   },
   "devDependencies": {
     "chai": "^1.10.0",
     "mocha": "^5.1.1",
     "sinon": "^1.12.2"
-  }
+  },
+  "snyk": true
 }
