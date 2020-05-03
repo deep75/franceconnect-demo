@@ -17,7 +17,6 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - name: npm install and security
+    - name: npm install
       run: |
         npm install
-        npm audit fix
