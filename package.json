@@ -22,7 +22,7 @@
     "passport-openidconnect": "0.0.1",
     "pm2": "^2.10.3",
     "remove": "~0.1.5",
-    "request": "~2.82.0",
+    "request": "~2.88.0",
     "serve-favicon": "^2.5.0"
   },
   "devDependencies": {
