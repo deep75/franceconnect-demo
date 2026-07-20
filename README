@@ -5,3 +5,6 @@ Test réseau
 
 ##Pour lancer l'application :
 `PORT=3001 npm start`
+
+##Variables d'environnement requises pour FranceConnect :
+`FC_CLIENT_ID`, `FC_CLIENT_SECRET`, `SESSION_SECRET`

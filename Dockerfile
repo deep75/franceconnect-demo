@@ -1,11 +1,14 @@
-FROM node:12-alpine as build
+FROM node:20-alpine as build
 
 WORKDIR /app
+COPY package*.json ./
+RUN npm ci --omit=dev
 COPY . ./
-RUN npm install
 
-FROM node:12-alpine
+FROM node:20-alpine
 
-COPY --from=build /app /
+WORKDIR /app
+
+COPY --from=build /app /app
 EXPOSE 3001
 CMD ["npm", "start"]

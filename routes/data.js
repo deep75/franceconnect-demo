@@ -1,7 +1,7 @@
 var express = require('express');
 var passport = require('passport');
 var router = express.Router();
-var request = require('request');
+var axios = require('axios');
 var config = (new (require('../helpers/configManager.js'))())._rawConfig;
 var Oauth2Strategy = require('passport-openidconnect').Strategy;
 var passportAuthenticateWithCUstomClaims = require('../helpers/passportAuthenticateWithCustomClaims').PassportAuthenticateWithCustomClaims;
@@ -9,6 +9,7 @@ var passportAuthenticateWithCUstomClaims = require('../helpers/passportAuthentic
 var _ = require('lodash');
 
 var parameters = {
+    issuer: config.fcURL,
     authorizationURL: config.oauth.authorizationURL,
     tokenURL: config.oauth.tokenURL,
     clientID: config.openIdConnectStrategyParameters.clientID,
@@ -50,7 +51,7 @@ router.get('/', function (req, res, next) {
 });
 
 router.get('/form', function (req, res) {
-    if (req.session.passport.user) {
+    if (req.session.passport && req.session.passport.user) {
         req.session.userInfo =  req.session.passport.user.name ? req.session.passport.user : req.session.userInfo;
         if (!req.session.user) {
             req.session.user = req.session.userInfo.name.givenName + " " + req.session.userInfo.name.familyName;
@@ -81,51 +82,62 @@ router.get('/callback', passport.authenticate('provider', {
 });
 
 router.get('/authOk', function (req, res, next) {
-    var options = {
-        url: config.quotientFamilialURL,
+    if (!req.session.passport || !req.session.passport.user) {
+        return res.redirect('/');
+    }
+
+    axios.get(config.quotientFamilialURL, {
         headers: {
             'Authorization': 'Bearer ' + req.session.passport.user.accessToken
+        },
+        validateStatus: function () {
+            return true;
         }
-    };
-    request.get(options, function (err, response, body) {
-        console.log(body)
-        if (err) {
-            console.error('Error while reaching FD');
-            console.error(err);
-            next(err);
-        } else if (!body) {
-            console.log('No body ... ');
-            next(new Error('No Body'));
-        }
-        else if (response.statusCode != 200) {
-            if (response.headers['www-authenticate']) {
-                var error = new Error();
-                var errorElements = response.headers['www-authenticate'].trim().match('Bearer: error="(.*?)",error_description="(.*?)"');
-                if (errorElements.length == 3) {
-                    error.name = errorElements[1];
-                    error.message = errorElements[2];
+    }).then(function(response) {
+        if (response.status !== 200) {
+            var authenticateHeader = response.headers['www-authenticate'];
+            if (authenticateHeader) {
+                var handledError = new Error();
+                var errorElements = authenticateHeader.trim().match(/Bearer:?\s*error="(.*?)",\s*error_description="(.*?)"/);
+                if (errorElements && errorElements.length === 3) {
+                    handledError.name = errorElements[1];
+                    handledError.message = errorElements[2];
+                } else {
+                    handledError.message = 'Wrongly formatted authentication header';
                 }
-                else {
-                    error.message = "Wrongly formatted authentication header";
-                }
-                console.error(error);
-                next(error);
-            } else {
-                var error = new Error();
-                error.name = 'errorTriggeredButNoDescriptionProvided';
-                error.message = 'An error occurred but no error description was provided to the client';
-                console.error(error);
-                console.error(response.statusCode);
-                console.error(response.body);
-                next(error);
+                console.error(handledError);
+                return next(handledError);
             }
+
+            var missingDescriptionError = new Error();
+            missingDescriptionError.name = 'errorTriggeredButNoDescriptionProvided';
+            missingDescriptionError.message = 'An error occurred but no error description was provided to the client';
+            console.error(missingDescriptionError);
+            console.error(response.status);
+            console.error(response.data);
+            return next(missingDescriptionError);
         }
-        else {
-            var info = JSON.parse(body);
-            req.session.quotientFamilial = info.quotient;
-            req.session.pivotIdentityReturnedByFcToFd = info.pivotIdentity;
-            res.redirect('/blank?urlRedirect=/data/done');
+
+        if (!response.data) {
+            console.log('No body ... ');
+            return next(new Error('No Body'));
         }
+
+        var info;
+        try {
+            info = typeof response.data === 'string' ? JSON.parse(response.data) : response.data;
+        } catch (err) {
+            console.error('Error while parsing FD response body');
+            return next(err);
+        }
+
+        req.session.quotientFamilial = info.quotient;
+        req.session.pivotIdentityReturnedByFcToFd = info.pivotIdentity;
+        return res.redirect('/blank?urlRedirect=/data/done');
+    }).catch(function(err) {
+        console.error('Error while reaching FD');
+        console.error(err);
+        next(err);
     });
 });
 router.get('/authKo', function (req, res, next) {

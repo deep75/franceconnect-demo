@@ -1,6 +1,6 @@
-<% include includes/header.ejs %>
+<%- include('includes/header.ejs') %>
 <div class="row-fluid">
-    <% include includes/voirie-panel.ejs %>
+    <%- include('includes/voirie-panel.ejs') %>
     <div class="span6 well">
         <form method="POST" id="crecheForm" class="form-horizontal" target="authFranceConnect">
             <fieldset>
@@ -80,4 +80,4 @@
         }
     }
 </script>
-<% include includes/footer %>
+<%- include('includes/footer') %>

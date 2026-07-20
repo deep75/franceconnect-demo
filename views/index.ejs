@@ -1,6 +1,6 @@
-<% include includes/header.ejs %>
+<%- include('includes/header.ejs') %>
 <div class="row-fluid">
-    <% include includes/voirie-panel.ejs %>
+    <%- include('includes/voirie-panel.ejs') %>
 
     <% if (user) { %>
     <div class="span6">
@@ -83,4 +83,4 @@
         }
     });
 </script>
-<% include includes/footer %>
+<%- include('includes/footer') %>
