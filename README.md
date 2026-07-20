@@ -1,6 +1,10 @@
 Exemple de fournisseur de services avec FranceConnect
 ==========================
 
+Variables d'environnement attendues pour exécuter la démo avec FranceConnect :
+
+`FC_CLIENT_ID`, `FC_CLIENT_SECRET`, `SESSION_SECRET`
+
 Avec Docker, lancez la comande suivante :
 
 ```

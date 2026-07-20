@@ -55,7 +55,7 @@ PassportAuthenticateWithCustomClaims.prototype.authenticate = function(req, opti
 
             // TODO: Try catch this to trap JSON parse errors.
             try {
-                jwtClaimsStr = new Buffer(idTokenSegments[1], 'base64').toString();
+                jwtClaimsStr = Buffer.from(idTokenSegments[1], 'base64').toString('utf8');
                 jwtClaims = JSON.parse(jwtClaimsStr);
             } catch (ex) {
                 console.error('error parsing jwt from FI '+req.headers.referer + ': ' + ex);

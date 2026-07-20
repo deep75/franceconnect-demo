@@ -46,7 +46,7 @@ router.get('/oidc_callback', checkStateParams, function (req, res, next) {
 });
 
 router.get('/demarche/etape1', function (req, res) {
-    if (req.session.passport.user !== undefined) {
+    if (req.session.passport && req.session.passport.user !== undefined) {
         var given_name = (req.session.passport.user._json.given_name) ? req.session.passport.user._json.given_name : '';
         var family_name = (req.session.passport.user._json.family_name) ? req.session.passport.user._json.family_name : '';
         req.session.user = given_name + ' ' + family_name;
@@ -65,7 +65,9 @@ router.get('/get-data', function (req, res) {
 });
 
 router.get('/logout', function (req, res) {
-    delete req.session.passport.user;
+    if (req.session.passport) {
+        delete req.session.passport.user;
+    }
     delete req.session.user;
     var idTokenHint = jwt.encode({aud:config.openIdConnectStrategyParameters.clientID}, config.openIdConnectStrategyParameters.clientSecret);
     req.session.state = crypto.randomBytes(25).toString('hex');
@@ -90,8 +92,8 @@ router.get('/debug', function (req, res) {
     var sub = null;
     if (req.session.idToken) {
         var idTokenSegments = req.session.idToken.split('.');
-        idToken = new Buffer(idTokenSegments[1], 'base64').toString();
-        sub = JSON.parse(new Buffer(idTokenSegments[1], 'base64').toString()).sub;
+        idToken = Buffer.from(idTokenSegments[1], 'base64').toString('utf8');
+        sub = JSON.parse(Buffer.from(idTokenSegments[1], 'base64').toString('utf8')).sub;
     }
     res.render('debug', {headers: req.headers, session: req.session, idToken: idToken, sub: sub});
 });

@@ -1,11 +1,14 @@
-FROM arm32v7/node:10-slim as build
+FROM arm32v7/node:20-slim as build
 
 WORKDIR /app
+COPY package*.json ./
+RUN npm ci --omit=dev
 COPY . ./
-RUN npm install
 
-FROM arm32v7/node:10-slim
+FROM arm32v7/node:20-slim
 
-COPY --from=build /app /
+WORKDIR /app
+
+COPY --from=build /app /app
 EXPOSE 3001
 CMD ["npm", "start"]

@@ -8,8 +8,6 @@ var config = (new (require('./helpers/configManager.js'))())._rawConfig;
 var express = require('express');
 var path = require('path');
 var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
 
 var session = require('express-session');
 var passport = require('passport');
@@ -29,19 +27,26 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(session({ secret: 'Some Secret !!!', key: 'sid'}));
+app.use(session({
+    secret: config.session.secret,
+    name: 'sid',
+    resave: false,
+    saveUninitialized: false
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 
 app.locals.FCUrl = config.fcURL;
 
 var strat = function() {
-    var strategy = new OpenIdConnectStrategy(config.openIdConnectStrategyParameters, function (iss, sub, profile, accesstoke, refreshtoken, done) {
+    var strategyOptions = Object.assign({
+        issuer: config.fcURL
+    }, config.openIdConnectStrategyParameters);
+    var strategy = new OpenIdConnectStrategy(strategyOptions, function (iss, sub, profile, accesstoke, refreshtoken, done) {
         process.nextTick(function () {
             done(null, profile);
         })
